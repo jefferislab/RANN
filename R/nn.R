@@ -2,20 +2,22 @@
 # NEAR NEIGHBOUR FINDER
 # ===============================
 
-nn <- function(data, mask=seq(from=1, to=1, length=(length(data[1,])-1)), p=10)
+nn <- function(data, mask=rep.int(1, times=ncol(data)-1), p=min(10,nrow(d))
 {
-	# Coerce to a data.frame
-	if(is.data.frame(data) == FALSE)
-		data <- data.frame(data)
+	# Coerce to matrix form
+	if(!is.matrix(data))
+		data <- data.matrix(data)
 	
 	# Check that this is an input/output dataset
-	if(length(data[1,]) <= 1)
+	if(ncol(data) <= 1)
 		stop("Please make this an input/output dataset.")	
+
+	if(p>nrow(d))
+		stop("Cannot find more nearest neighbours than there are points")
 		
 	num.inputs 	<- sum(mask)
-	num.cols	<- length(data[1,])
-	dimension	<- length(data[1,])
-	M		    <- length(data[,1])
+	dimension	<- ncol(data)
+	M		    <- nrow(data)
 	
 	results <- .C("get_NN",
 		as.matrix(data),

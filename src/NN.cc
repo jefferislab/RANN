@@ -73,18 +73,6 @@ extern "C"
 		    M,			// Number of points
 		    *sumMask);		// Dimension of space
 
-//	for (int j = 0; j < (numNN*M); j++) 	// Initialize the neccessary arrays
-//	{
-//	    distances[j] 	= 0.0000;
-//	    nn_index[j]		= 0;
-//	}
-
-//	for(int t = 0; t < numNN; t++)
-//	{
-///	    dists[t] = 00.000;
-//	    nn_idx[t] = 0;
-//	}	    
-
 	for(int i = 0; i < M; i++)	// read query points
 	{
 	    the_tree->annkSearch(	// search
