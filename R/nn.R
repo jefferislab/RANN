@@ -2,7 +2,7 @@
 # NEAR NEIGHBOUR FINDER
 # ===============================
 
-nn <- function(data, mask=rep.int(1, times=ncol(data)-1), p=min(10,nrow(d))
+nn <- function(data, mask=rep.int(1, times=ncol(data)-1), p=min(10,nrow(data)))
 {
 	# Coerce to matrix form
 	if(!is.matrix(data))
@@ -12,7 +12,7 @@ nn <- function(data, mask=rep.int(1, times=ncol(data)-1), p=min(10,nrow(d))
 	if(ncol(data) <= 1)
 		stop("Please make this an input/output dataset.")	
 
-	if(p>nrow(d))
+	if(p>nrow(data))
 		stop("Cannot find more nearest neighbours than there are points")
 		
 	num.inputs 	<- sum(mask)
