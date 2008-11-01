@@ -36,7 +36,7 @@ nn <- function(data, mask=rep.int(1, times=ncol(data)-1), p=min(10,nrow(data)))
 	return(list(nn.idx=data.frame(nn.indexes), nn.dists=data.frame(nn.dist)))
 }
 
-nn2 <- function(data, query, k=min(10,nrow(data)))
+nn2 <- function(data, query, k=min(10,nrow(data)),eps=0.0)
 {
 	# Coerce to matrix form
 	if(!is.matrix(data))
@@ -57,16 +57,17 @@ nn2 <- function(data, query, k=min(10,nrow(data)))
 	ND		    <- nrow(data)
 	NQ		    <- nrow(query)
 	
-	# void get_NN_2Set(double *data, double *query, int *K, int *D, int *ND, int *NQ, int *nn_index,
-	# 	double *distances)
+	# void get_NN_2Set(double *data, double *query, int *D, int *ND, int *NQ, int *K, double *EPS,
+	# int *nn_index, double *distances)
 	
 	results <- .C("get_NN_2Set",
 		as.matrix(data),
 		as.matrix(query),
-		as.integer(k),
 		as.integer(dimension),
 		as.integer(ND),
 		as.integer(NQ),
+		as.integer(k),
+		as.double(eps),
 		nn.idx   = integer(k*NQ),
 		nn       = double(k*NQ), PACKAGE="knnFinder")
 		
