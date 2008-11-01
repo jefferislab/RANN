@@ -27,8 +27,10 @@ extern "C"
 	
 	output_pts 	= annAllocPts(M, 1);		// Allocate query point
 	data_pts 	= annAllocPts(M, *sumMask);	// Allocate data points
-	nn_idx 		= new ANNidx[numNN];		// Allocate near neigh indices
-	dists 		= new ANNdist[numNN];		// Allocate near neighbor dists
+	// NB +1 is to allow for return of the point itself which will be
+	// the nearest neighbour with v1.1.1 of the ANN library
+	nn_idx 		= new ANNidx[numNN+1];		// Allocate near neigh indices
+	dists 		= new ANNdist[numNN+1];		// Allocate near neighbor dists
 
 	int incOutputData 	= (d-1)*M;
 	int d_ptr[d-1];
@@ -77,12 +79,12 @@ extern "C"
 	{
 		the_tree->annkSearch(	// search
 			data_pts[i],	// query point
-			numNN,		// number of near neighbors
+			numNN+1,		// number of near neighbors
 			nn_idx,		// nearest neighbors (returned)
 			dists,		// distance (returned)
 			error_bound);	// error bound
 
-		for (int j = 0; j < numNN; j++)
+		for (int j = 1; j <= numNN; j++)
 		{
 			distances[ptr] = sqrt(dists[j]);	// unsquare distance
 			nn_index[ptr]  = nn_idx[j] + 1;			// put indexes in returned array
