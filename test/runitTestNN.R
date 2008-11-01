@@ -477,3 +477,22 @@ test.NN2<-function()
 	checkEqualsNumeric(as.matrix(nearest.func[[2]]),as.matrix(nearest[[2]]))
 	
 }
+
+test.NN2.simple<-function(){
+	res<-structure(list(nn.idx = structure(c(1L, 2L, 2L), .Dim = c(3L, 
+	1L)), nn.dists = structure(c(0.01, 1, 2), .Dim = c(3L, 1L))), .Names = c("nn.idx", 
+	"nn.dists"))
+	
+	res.func<-nn2(rbind(c(1,0),c(2,0)),rbind(c(1.01,0),c(3,0),c(4.0,0)),k=1)
+	checkEquals(res,res.func)
+}
+
+# NB this fails with the version of ANN distributed with knnFinder v1.0
+test.NN2.withIdenticalPoint<-function(){
+	res<-structure(list(nn.idx = structure(c(1L, 2L, 2L), .Dim = c(3L, 
+	1L)), nn.dists = structure(c(0.00, 1, 2), .Dim = c(3L, 1L))), .Names = c("nn.idx", 
+	"nn.dists"))
+	
+	res.func<-nn2(rbind(c(1,0),c(2,0)),rbind(c(1.0,0),c(3,0),c(4.0,0)),k=1)
+	checkEquals(res,res.func)
+}
