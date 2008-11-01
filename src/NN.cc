@@ -130,9 +130,9 @@ extern "C"
 		d_ptr[i] = i*nd;
 	} // end for
 
-	ANNpoint p = new ANNcoord[d];
 	for(int i = 0; i < nd; i++) // now construct the points
 	{
+		ANNpoint p = new ANNcoord[d];
 		for(int j = 0; j < d; j++)
 		{
 			int temp = d_ptr[j];
@@ -142,37 +142,30 @@ extern "C"
 		} // end inner for loop
 		data_pts[i] = p;
 	} // end for
-	
-	// Next 2 for loops are concerned with getting the linear R array into the ANN format
-	for(int i = 0; i < d; i++)
-	{
-		d_ptr[i] = i*nq;
-	} // end for
-
-	for(int i = 0; i < nq; i++) // now construct the points
-	{
-		for(int j = 0; j < d; j++)
-		{
-			int temp = d_ptr[j];
-			p[j]=query[temp];
-			d_ptr[j] = 0;
-			d_ptr[j] = temp + 1;
-		} // end inner for loop
-
-		query_pts[i] = p;
-	} // end for
-	
-
 
 	the_tree = new ANNkd_tree(	// Build search structure
 			data_pts,		// The data points
 			nd,			// Number of points
 			d);		// Dimension of space
 
+	for(int i = 0; i < d; i++)
+	{
+		d_ptr[i] = i*nq;
+	} // end for
+	
+	ANNpoint pq = annAllocPt(d);
 	for(int i = 0; i < nq; i++)	// read query points
 	{
+		for(int j = 0; j < d; j++)
+		{
+			int temp = d_ptr[j];
+			pq[j]=query[temp];
+			d_ptr[j] = 0;
+			d_ptr[j] = temp + 1;
+		} // end inner for loop
+		
 		the_tree->annkSearch(	// search
-			query_pts[i],	// query point
+			pq,	// query point
 			k,		// number of near neighbors
 			nn_idx,		// nearest neighbors (returned)
 			dists,		// distance (returned)
