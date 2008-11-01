@@ -108,18 +108,12 @@ extern "C"
 
 	double	error_bound = 00.00;;	// enough said!
 
-	ANNpointArray	data_pts;	// Data points
-	ANNpointArray	query_pts;	// Query point
-	ANNidxArray	nn_idx;		// Near neighbor indices
-	ANNdistArray	dists;		// Near neighbor distances
 	ANNkd_tree	*the_tree;	// Search structure
 
-	query_pts 	= annAllocPts(nq,d);		// Allocate query points
-	data_pts 	= annAllocPts(nd,d);		// Allocate data points
-	nn_idx 		= new ANNidx[k];		// Allocate near neigh indices
-	dists 		= new ANNdist[k];		// Allocate near neighbor dists
+	ANNpointArray data_pts 	= annAllocPts(nd,d);		// Allocate data points
+	ANNidxArray nn_idx 		= new ANNidx[k];		// Allocate near neigh indices
+	ANNdistArray dists 		= new ANNdist[k];		// Allocate near neighbor dists
 
-	int incOutputData 	= (d-1)*nq;
 	int d_ptr[d];
 	int ptr = 0;
 
@@ -128,41 +122,37 @@ extern "C"
 	for(int i = 0; i < d; i++)
 	{
 		d_ptr[i] = i*nd;
-	} // end for
+	}
 
 	for(int i = 0; i < nd; i++) // now construct the points
 	{
 		ANNpoint p = new ANNcoord[d];
 		for(int j = 0; j < d; j++)
 		{
-			int temp = d_ptr[j];
-			p[j]=data[temp];
-			d_ptr[j] = 0;
-			d_ptr[j] = temp + 1;
-		} // end inner for loop
+			p[j]=data[ d_ptr[j]++ ];
+		}
 		data_pts[i] = p;
-	} // end for
+	}
 
 	the_tree = new ANNkd_tree(	// Build search structure
 			data_pts,		// The data points
 			nd,			// Number of points
 			d);		// Dimension of space
 
+	// set up offsets for query point matrix (to convert Row / Col major)
 	for(int i = 0; i < d; i++)
 	{
 		d_ptr[i] = i*nq;
-	} // end for
+	}
 	
 	ANNpoint pq = annAllocPt(d);
-	for(int i = 0; i < nq; i++)	// read query points
+	for(int i = 0; i < nq; i++)	// Run all query points against tree
 	{
+		// read coords of current query point
 		for(int j = 0; j < d; j++)
 		{
-			int temp = d_ptr[j];
-			pq[j]=query[temp];
-			d_ptr[j] = 0;
-			d_ptr[j] = temp + 1;
-		} // end inner for loop
+			pq[j]=query[ d_ptr[j]++ ];
+		}
 		
 		the_tree->annkSearch(	// search
 			pq,	// query point
@@ -174,16 +164,14 @@ extern "C"
 		for (int j = 0; j < k; j++)
 		{
 			distances[ptr] = sqrt(dists[j]);	// unsquare distance
-			nn_index[ptr]  = nn_idx[j] + 1;			// put indexes in returned array
-			ptr++;
-		} // end inner for
-	} // end for
+			nn_index[ptr++]  = nn_idx[j] + 1;			// put indexes in returned array
+		}
+	}
 
 	// Do a little bit of memory management......
-	delete data_pts;
-	delete query_pts;
-	delete nn_idx;
-	delete dists;
+	delete [] data_pts;
+	delete [] nn_idx;
+	delete [] dists;
 	delete the_tree;
 	}
 }
