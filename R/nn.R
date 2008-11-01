@@ -44,7 +44,7 @@ nn2 <- function(data, query, k=min(10,nrow(data)))
 
 	# Coerce to matrix form
 	if(!is.matrix(query))
-		data <- data.matrix(query)
+		query <- data.matrix(query)
 	
 	# Check that this is an input/output dataset
 	if(ncol(data) != ncol(query) )
