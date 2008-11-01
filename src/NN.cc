@@ -100,15 +100,15 @@ extern "C"
 	delete the_tree;
 	}
 	
-	void get_NN_2Set(double *data, double *query, int *K, int *D, int *ND, int *NQ, int *nn_index,
-		double *distances)
+	void get_NN_2Set(double *data, double *query, int *D, int *ND, int *NQ, int *K, double *EPS,
+		int *nn_index, double *distances)
 	{
 	int		d = *D;			// Number of Dimensions for points
 	int		nd = *ND;		// Number of Data points
 	int		nq= *NQ;		// Number of Query points
 	int		k = * K;		// Maximum number of Nearest Neighbours
 
-	double	error_bound = 00.00;;	// enough said!
+	double	error_bound = *EPS;;	// enough said!
 
 	ANNkd_tree	*the_tree;	// Search structure
 
