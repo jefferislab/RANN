@@ -116,7 +116,6 @@ extern "C"
 
 	int d_ptr[d];
 	int ptr = 0;
-
 	
 	// Next 2 for loops are concerned with getting the linear R array into the ANN format
 	for(int i = 0; i < d; i++)
@@ -126,12 +125,10 @@ extern "C"
 
 	for(int i = 0; i < nd; i++) // now construct the points
 	{
-		ANNpoint p = new ANNcoord[d];
 		for(int j = 0; j < d; j++)
 		{
-			p[j]=data[ d_ptr[j]++ ];
+			data_pts[i][j]=data[ d_ptr[j]++ ];
 		}
-		data_pts[i] = p;
 	}
 
 	the_tree = new ANNkd_tree(	// Build search structure
@@ -169,7 +166,8 @@ extern "C"
 	}
 
 	// Do a little bit of memory management......
-	delete [] data_pts;
+	annDeallocPt(pq);
+	annDeallocPts(data_pts);
 	delete [] nn_idx;
 	delete [] dists;
 	delete the_tree;
