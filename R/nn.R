@@ -47,3 +47,53 @@ nn <- function(data, mask=rep.int(1, times=ncol(data)-1), p=min(10,nrow(data)))
 	return(list(nn.idx=data.frame(nn.indexes), nn.dists=data.frame(nn.dist)))
 }
 
+nn2 <- function(data, query, k=min(10,nrow(data)))
+{
+	# Coerce to matrix form
+	if(!is.matrix(data))
+		data <- data.matrix(data)
+
+	# Coerce to matrix form
+	if(!is.matrix(query))
+		data <- data.matrix(query)
+	
+	# Check that this is an input/output dataset
+	if(ncol(data) != ncol(query) )
+		stop("Query and data tables must have same dimensions")	
+
+	if(k>nrow(data))
+		stop("Cannot find more nearest neighbours than there are points")
+		
+	dimension	<- ncol(data)
+	ND		    <- nrow(data)
+	NQ		    <- nrow(query)
+	
+	# void get_NN_2Set(double *data, double *query, int *K, int *D, int *ND, int *NQ, int *nn_index,
+	# 	double *distances)
+	
+	results <- .C("get_NN_2Set",
+		as.matrix(data),
+		as.matrix(query),
+		as.integer(k),
+		as.integer(dimension),
+		as.integer(ND),
+		as.integer(NQ),
+		nn.idx   = integer(k*NQ),
+		nn       = double(k*NQ), PACKAGE="knnFinder")
+		
+	# now put the returned vector into an (NQ x k) array
+	nn.indexes  <- array(dim=c(NQ, k))
+	nn.dist     <- array(dim=c(NQ, k))
+	ptr        <- 1
+	for(i in 1 : NQ)
+	{
+		for(j in 1 : k)
+		{
+			nn.indexes[i,j]  <- results$nn.idx[ptr]
+			nn.dist[i,j]     <- (results$nn[ptr])
+			ptr <- ptr + 1
+		} # end inner for
+	} # end outer for
+
+	return(list(nn.idx=data.frame(nn.indexes), nn.dists=data.frame(nn.dist)))
+}

@@ -97,5 +97,101 @@ extern "C"
 	delete dists;
 	delete the_tree;
 	}
+	
+	void get_NN_2Set(double *data, double *query, int *K, int *D, int *ND, int *NQ, int *nn_index,
+		double *distances)
+	{
+	int		d = *D;			// Number of Dimensions for points
+	int		nd = *ND;		// Number of Data points
+	int		nq= *NQ;		// Number of Query points
+	int		k = * K;		// Maximum number of Nearest Neighbours
+
+	double	error_bound = 00.00;;	// enough said!
+
+	ANNpointArray	data_pts;	// Data points
+	ANNpointArray	query_pts;	// Query point
+	ANNidxArray	nn_idx;		// Near neighbor indices
+	ANNdistArray	dists;		// Near neighbor distances
+	ANNkd_tree	*the_tree;	// Search structure
+
+	query_pts 	= annAllocPts(nq,d);		// Allocate query points
+	data_pts 	= annAllocPts(nd,d);		// Allocate data points
+	nn_idx 		= new ANNidx[k];		// Allocate near neigh indices
+	dists 		= new ANNdist[k];		// Allocate near neighbor dists
+
+	int incOutputData 	= (d-1)*nq;
+	int d_ptr[d];
+	int ptr = 0;
+
+	
+	// Next 2 for loops are concerned with getting the linear R array into the ANN format
+	for(int i = 0; i < d; i++)
+	{
+		d_ptr[i] = i*nd;
+	} // end for
+
+	ANNpoint p = new ANNcoord[d];
+	for(int i = 0; i < nd; i++) // now construct the points
+	{
+		for(int j = 0; j < d; j++)
+		{
+			int temp = d_ptr[j];
+			p[j]=data[temp];
+			d_ptr[j] = 0;
+			d_ptr[j] = temp + 1;
+		} // end inner for loop
+		data_pts[i] = p;
+	} // end for
+	
+	// Next 2 for loops are concerned with getting the linear R array into the ANN format
+	for(int i = 0; i < d; i++)
+	{
+		d_ptr[i] = i*nq;
+	} // end for
+
+	for(int i = 0; i < nq; i++) // now construct the points
+	{
+		for(int j = 0; j < d; j++)
+		{
+			int temp = d_ptr[j];
+			p[j]=data[temp];
+			d_ptr[j] = 0;
+			d_ptr[j] = temp + 1;
+		} // end inner for loop
+
+		query_pts[i] = p;
+	} // end for
+	
+
+
+	the_tree = new ANNkd_tree(	// Build search structure
+			data_pts,		// The data points
+			nd,			// Number of points
+			d);		// Dimension of space
+
+	for(int i = 0; i < nq; i++)	// read query points
+	{
+		the_tree->annkSearch(	// search
+			query_pts[i],	// query point
+			k,		// number of near neighbors
+			nn_idx,		// nearest neighbors (returned)
+			dists,		// distance (returned)
+			error_bound);	// error bound
+
+		for (int j = 0; j < k; j++)
+		{
+			distances[ptr] = sqrt(dists[j]);	// unsquare distance
+			nn_index[ptr]  = nn_idx[j] + 1;			// put indexes in returned array
+			ptr++;
+		} // end inner for
+	} // end for
+
+	// Do a little bit of memory management......
+	delete data_pts;
+	delete query_pts;
+	delete nn_idx;
+	delete dists;
+	delete the_tree;
+	}
 }
 
