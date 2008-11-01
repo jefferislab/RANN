@@ -154,7 +154,7 @@ extern "C"
 		for(int j = 0; j < d; j++)
 		{
 			int temp = d_ptr[j];
-			p[j]=data[temp];
+			p[j]=query[temp];
 			d_ptr[j] = 0;
 			d_ptr[j] = temp + 1;
 		} // end inner for loop
