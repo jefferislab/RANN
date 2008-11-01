@@ -470,10 +470,10 @@ test.NN2<-function()
 	        1.58019302443235, 1.23698083599426)), .Names = c("X1", 
 	    "X2", "X3", "X4", "X5"), row.names = c(NA, -10L), class = "data.frame")), .Names = c("nn.idx", 
 	"nn.dists"))
-	
+		
 	nearest.func=nn2(a,b,k=5)
 	
-	checkEqualsNumeric(nearest.func[[1]],nearest[[1]])
-	checkEqualsNumeric(nearest.func[[2]],nearest[[2]])
+	checkEqualsNumeric(as.matrix(nearest.func[[1]]),as.matrix(nearest[[1]]))
+	checkEqualsNumeric(as.matrix(nearest.func[[2]]),as.matrix(nearest[[2]]))
 	
 }
