@@ -29,20 +29,9 @@ nn <- function(data, mask=rep.int(1, times=ncol(data)-1), p=min(10,nrow(data)))
 		nn.idx   = integer(p*M),
 		nn       = double(p*M), PACKAGE="knnFinder")
 		
-	# now put the returned vector into an (M x p) array
-	nn.indexes  <- array(dim=c(M, p))
-	nn.dist     <- array(dim=c(M, p))
-	output.dist <- array(dim=c(M, p))
-	ptr        <- 1
-	for(i in 1 : M)
-	{
-		for(j in 1 : p)
-		{
-			nn.indexes[i,j]  <- results$nn.idx[ptr]
-			nn.dist[i,j]     <- (results$nn[ptr])
-			ptr <- ptr + 1
-		} # end inner for
-	} # end outer for
+	# now put the returned vectors into (M x p) arrays
+	nn.indexes=matrix(results$nn.idx,ncol=p,byrow=TRUE)
+	nn.dist=matrix(results$nn,ncol=p,byrow=TRUE)
 
 	return(list(nn.idx=data.frame(nn.indexes), nn.dists=data.frame(nn.dist)))
 }
@@ -81,19 +70,9 @@ nn2 <- function(data, query, k=min(10,nrow(data)))
 		nn.idx   = integer(k*NQ),
 		nn       = double(k*NQ), PACKAGE="knnFinder")
 		
-	# now put the returned vector into an (NQ x k) array
-	nn.indexes  <- array(dim=c(NQ, k))
-	nn.dist     <- array(dim=c(NQ, k))
-	ptr        <- 1
-	for(i in 1 : NQ)
-	{
-		for(j in 1 : k)
-		{
-			nn.indexes[i,j]  <- results$nn.idx[ptr]
-			nn.dist[i,j]     <- (results$nn[ptr])
-			ptr <- ptr + 1
-		} # end inner for
-	} # end outer for
+	# now put the returned vectors into (nq x k) arrays
+	nn.indexes=matrix(results$nn.idx,ncol=k,byrow=TRUE)
+	nn.dist=matrix(results$nn,ncol=k,byrow=TRUE)
 
-	return(list(nn.idx=data.frame(nn.indexes), nn.dists=data.frame(nn.dist)))
+	return(list(nn.idx=nn.indexes, nn.dists=nn.dist))
 }
