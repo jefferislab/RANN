@@ -38,31 +38,31 @@ nn <- function(data, mask=rep.int(1, times=ncol(data)-1), p=min(10,nrow(data)))
 
 nn2 <- function(data, query, k=min(10,nrow(data)),eps=0.0)
 {
-	# Coerce to matrix form
-	if(!is.matrix(data))
-		data <- data.matrix(data)
-
-	# Coerce to matrix form
-	if(!is.matrix(query))
-		query <- data.matrix(query)
-	
-	# Check that this is an input/output dataset
-	if(ncol(data) != ncol(query) )
-		stop("Query and data tables must have same dimensions")	
-
-	if(k>nrow(data))
-		stop("Cannot find more nearest neighbours than there are points")
-		
 	dimension	<- ncol(data)
 	ND		    <- nrow(data)
 	NQ		    <- nrow(query)
+	
+	# Check that both datasets have same dimensionality
+	if(ncol(data) != ncol(query) )
+		stop("Query and data tables must have same dimensions")	
+
+	if(k>ND)
+		stop("Cannot find more nearest neighbours than there are points")
+
+	# Coerce to matrix form
+	if(is.data.frame(data))
+		data <- unlist(data,use.names=FALSE)
+
+	# Coerce to matrix form
+	if(!is.matrix(query))
+		query <- unlist(query,use.names=FALSE)
 	
 	# void get_NN_2Set(double *data, double *query, int *D, int *ND, int *NQ, int *K, double *EPS,
 	# int *nn_index, double *distances)
 	
 	results <- .C("get_NN_2Set",
-		as.matrix(data),
-		as.matrix(query),
+		as.double(data),
+		as.double(query),
 		as.integer(dimension),
 		as.integer(ND),
 		as.integer(NQ),
