@@ -101,17 +101,19 @@ extern "C"
 	}
 	
 	void get_NN_2Set(double *data, double *query, int *D, int *ND, int *NQ, int *K, double *EPS,
-		int *PRIORITYSEARCH, int *nn_index, double *distances)
+		int *PRIORITYSEARCH, int *USEBDTREE, int *nn_index, double *distances)
 	{
 	int		d = *D;			// Number of Dimensions for points
 	int		nd = *ND;		// Number of Data points
 	int		nq= *NQ;		// Number of Query points
 	int		k = * K;		// Maximum number of Nearest Neighbours
 	bool prioritySearch = *PRIORITYSEARCH?true:false;
+	bool usebdtree = *USEBDTREE?true:false;
 
 	double	error_bound = *EPS;;	// enough said!
 
 	ANNkd_tree	*kd_tree;	// Search structure
+	ANNbd_tree	*bd_tree;	// Search structure
 
 	ANNpointArray data_pts 	= annAllocPts(nd,d);		// Allocate data points
 	ANNidxArray nn_idx 		= new ANNidx[k];		// Allocate near neigh indices
@@ -133,11 +135,18 @@ extern "C"
 			data_pts[i][j]=data[ d_ptr[j]++ ];
 		}
 	}
-
-	kd_tree = new ANNkd_tree(	// Build search structure
-			data_pts,		// The data points
-			nd,			// Number of points
-			d);		// Dimension of space
+	
+	if(usebdtree){
+		kd_tree = new ANNbd_tree(	// Build search structure
+				data_pts,		// The data points
+				nd,			// Number of points
+				d);		// Dimension of space				
+	} else {
+		kd_tree = new ANNkd_tree(	// Build search structure
+				data_pts,		// The data points
+				nd,			// Number of points
+				d);		// Dimension of space		
+	}
 
 	// set up offsets for query point matrix (to convert Row / Col major)
 	for(int i = 0; i < d; i++)
@@ -154,6 +163,14 @@ extern "C"
 			pq[j]=query[ d_ptr[j]++ ];
 		}
 		if(prioritySearch){
+			if(usebdtree){
+				dynamic_cast<ANNbd_tree*>(kd_tree)->annkPriSearch(	// search
+					pq,	// query point
+					k,		// number of near neighbors
+					nn_idx,		// nearest neighbors (returned)
+					dists,		// distance (returned)
+					error_bound);	// error bound
+			} else
 			kd_tree->annkPriSearch(	// search
 				pq,	// query point
 				k,		// number of near neighbors
@@ -161,6 +178,14 @@ extern "C"
 				dists,		// distance (returned)
 				error_bound);	// error bound			
 		} else{
+			if(usebdtree){
+				dynamic_cast<ANNbd_tree*>(kd_tree)->annkSearch(	// search
+					pq,	// query point
+					k,		// number of near neighbors
+					nn_idx,		// nearest neighbors (returned)
+					dists,		// distance (returned)
+					error_bound);	// error bound
+			} else
 			kd_tree->annkSearch(	// search
 				pq,	// query point
 				k,		// number of near neighbors

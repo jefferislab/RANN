@@ -36,7 +36,8 @@ nn <- function(data, mask=rep.int(1, times=ncol(data)-1), p=min(10,nrow(data)))
 	return(list(nn.idx=data.frame(nn.indexes), nn.dists=data.frame(nn.dist)))
 }
 
-nn2 <- function(data, query, k=min(10,nrow(data)),searchtype=c("standard","priority"),eps=0.0)
+nn2 <- function(data, query, k=min(10,nrow(data)),
+	searchtype=c("standard","priority"),treetype=c("kd","bd"),eps=0.0)
 {
 	dimension	<- ncol(data)
 	ND		    <- nrow(data)
@@ -50,6 +51,7 @@ nn2 <- function(data, query, k=min(10,nrow(data)),searchtype=c("standard","prior
 		stop("Cannot find more nearest neighbours than there are points")
 		
 	searchtype=match.arg(searchtype)
+	treetype=match.arg(treetype)
 
 	# Coerce to matrix form
 	if(is.data.frame(data))
@@ -71,6 +73,7 @@ nn2 <- function(data, query, k=min(10,nrow(data)),searchtype=c("standard","prior
 		as.integer(k),
 		as.double(eps),
 		as.integer(searchtype=="priority"), 
+		as.integer(treetype=="bd"), 
 		nn.idx   = integer(k*NQ),
 		nn       = double(k*NQ), PACKAGE="knnFinder")
 		
