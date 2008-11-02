@@ -101,16 +101,17 @@ extern "C"
 	}
 	
 	void get_NN_2Set(double *data, double *query, int *D, int *ND, int *NQ, int *K, double *EPS,
-		int *nn_index, double *distances)
+		int *PRIORITYSEARCH, int *nn_index, double *distances)
 	{
 	int		d = *D;			// Number of Dimensions for points
 	int		nd = *ND;		// Number of Data points
 	int		nq= *NQ;		// Number of Query points
 	int		k = * K;		// Maximum number of Nearest Neighbours
+	bool prioritySearch = *PRIORITYSEARCH?true:false;
 
 	double	error_bound = *EPS;;	// enough said!
 
-	ANNkd_tree	*the_tree;	// Search structure
+	ANNkd_tree	*kd_tree;	// Search structure
 
 	ANNpointArray data_pts 	= annAllocPts(nd,d);		// Allocate data points
 	ANNidxArray nn_idx 		= new ANNidx[k];		// Allocate near neigh indices
@@ -133,7 +134,7 @@ extern "C"
 		}
 	}
 
-	the_tree = new ANNkd_tree(	// Build search structure
+	kd_tree = new ANNkd_tree(	// Build search structure
 			data_pts,		// The data points
 			nd,			// Number of points
 			d);		// Dimension of space
@@ -152,13 +153,21 @@ extern "C"
 		{
 			pq[j]=query[ d_ptr[j]++ ];
 		}
-		
-		the_tree->annkSearch(	// search
-			pq,	// query point
-			k,		// number of near neighbors
-			nn_idx,		// nearest neighbors (returned)
-			dists,		// distance (returned)
-			error_bound);	// error bound
+		if(prioritySearch){
+			kd_tree->annkPriSearch(	// search
+				pq,	// query point
+				k,		// number of near neighbors
+				nn_idx,		// nearest neighbors (returned)
+				dists,		// distance (returned)
+				error_bound);	// error bound			
+		} else{
+			kd_tree->annkSearch(	// search
+				pq,	// query point
+				k,		// number of near neighbors
+				nn_idx,		// nearest neighbors (returned)
+				dists,		// distance (returned)
+				error_bound);	// error bound			
+		}
 
 		for (int j = 0; j < k; j++)
 		{
@@ -172,7 +181,7 @@ extern "C"
 	annDeallocPts(data_pts);
 	delete [] nn_idx;
 	delete [] dists;
-	delete the_tree;
+	delete kd_tree;
 	}
 }
 
