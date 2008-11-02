@@ -496,3 +496,17 @@ test.NN2.withIdenticalPoint<-function(){
 	res.func<-nn2(rbind(c(1,0),c(2,0)),rbind(c(1.0,0),c(3,0),c(4.0,0)),k=1)
 	checkEquals(res,res.func)
 }
+
+test.NN2.crosscheckSearchTypeAndTreeType<-function(){
+	set.seed(1)
+	a=matrix(rnorm(3000),ncol=3)
+	b=matrix(rnorm(3000),ncol=3)
+	n.standard<-nn2(a,b,k=5,searchtype='standard')
+	n.priority<-nn2(a,b,k=5,searchtype='priority')
+	n.bd.standard<-nn2(a,b,k=5,searchtype='standard',treetype='bd')
+	n.bd.priority<-nn2(a,b,k=5,searchtype='priority',treetype='bd')
+
+	checkEquals(n.standard,n.priority)
+	checkEquals(n.standard,n.bd.standard)
+	checkEquals(n.standard,n.bd.priority)
+}
