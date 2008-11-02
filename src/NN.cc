@@ -112,8 +112,7 @@ extern "C"
 
 	double	error_bound = *EPS;;	// enough said!
 
-	ANNkd_tree	*kd_tree;	// Search structure
-	ANNbd_tree	*bd_tree;	// Search structure
+	ANNkd_tree	*the_tree;	// Search structure
 
 	ANNpointArray data_pts 	= annAllocPts(nd,d);		// Allocate data points
 	ANNidxArray nn_idx 		= new ANNidx[k];		// Allocate near neigh indices
@@ -137,12 +136,12 @@ extern "C"
 	}
 	
 	if(usebdtree){
-		kd_tree = new ANNbd_tree(	// Build search structure
+		the_tree = new ANNbd_tree(	// Build search structure
 				data_pts,		// The data points
 				nd,			// Number of points
 				d);		// Dimension of space				
 	} else {
-		kd_tree = new ANNkd_tree(	// Build search structure
+		the_tree = new ANNkd_tree(	// Build search structure
 				data_pts,		// The data points
 				nd,			// Number of points
 				d);		// Dimension of space		
@@ -163,30 +162,14 @@ extern "C"
 			pq[j]=query[ d_ptr[j]++ ];
 		}
 		if(prioritySearch){
-			if(usebdtree){
-				dynamic_cast<ANNbd_tree*>(kd_tree)->annkPriSearch(	// search
-					pq,	// query point
-					k,		// number of near neighbors
-					nn_idx,		// nearest neighbors (returned)
-					dists,		// distance (returned)
-					error_bound);	// error bound
-			} else
-			kd_tree->annkPriSearch(	// search
+			the_tree->annkPriSearch(	// search
 				pq,	// query point
 				k,		// number of near neighbors
 				nn_idx,		// nearest neighbors (returned)
 				dists,		// distance (returned)
 				error_bound);	// error bound			
 		} else{
-			if(usebdtree){
-				dynamic_cast<ANNbd_tree*>(kd_tree)->annkSearch(	// search
-					pq,	// query point
-					k,		// number of near neighbors
-					nn_idx,		// nearest neighbors (returned)
-					dists,		// distance (returned)
-					error_bound);	// error bound
-			} else
-			kd_tree->annkSearch(	// search
+			the_tree->annkSearch(	// search
 				pq,	// query point
 				k,		// number of near neighbors
 				nn_idx,		// nearest neighbors (returned)
@@ -206,7 +189,7 @@ extern "C"
 	annDeallocPts(data_pts);
 	delete [] nn_idx;
 	delete [] dists;
-	delete kd_tree;
+	delete the_tree;
 	}
 }
 
