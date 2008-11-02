@@ -510,3 +510,15 @@ test.NN2.crosscheckSearchTypeAndTreeType<-function(){
 	checkEquals(n.standard,n.bd.standard)
 	checkEquals(n.standard,n.bd.priority)
 }
+
+test.NN2.FixedRadiusWithLargeRadius<-function(){
+	set.seed(1)
+	a=matrix(rnorm(3000),ncol=3)
+	b=matrix(rnorm(3000),ncol=3)
+	n.standard<-nn2(a,b,k=5,searchtype='standard')
+	n.rad<-nn2(a,b,k=5,searchtype='radius',radius=20.0)
+	n.bd.rad<-nn2(a,b,k=5,searchtype='radius',radius=20.0,treetype='bd')
+
+	checkEquals(n.standard,n.rad)
+	checkEquals(n.standard,n.bd.rad)
+}

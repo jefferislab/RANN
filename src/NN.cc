@@ -101,17 +101,19 @@ extern "C"
 	}
 	
 	void get_NN_2Set(double *data, double *query, int *D, int *ND, int *NQ, int *K, double *EPS,
-		int *PRIORITYSEARCH, int *USEBDTREE, int *nn_index, double *distances)
+		int *SEARCHTYPE, int *USEBDTREE, double *SQRAD, int *nn_index, double *distances)
 	{
 	int		d = *D;			// Number of Dimensions for points
 	int		nd = *ND;		// Number of Data points
 	int		nq= *NQ;		// Number of Query points
 	int		k = * K;		// Maximum number of Nearest Neighbours
-	bool prioritySearch = *PRIORITYSEARCH?true:false;
+
+	int searchtype = *SEARCHTYPE;
 	bool usebdtree = *USEBDTREE?true:false;
 
-	double	error_bound = *EPS;;	// enough said!
-
+	double	error_bound = *EPS;	// enough said!
+	double  sqRad = *SQRAD;		// Squared Radius for rad search
+	
 	ANNkd_tree	*the_tree;	// Search structure
 
 	ANNpointArray data_pts 	= annAllocPts(nd,d);		// Allocate data points
@@ -161,21 +163,32 @@ extern "C"
 		{
 			pq[j]=query[ d_ptr[j]++ ];
 		}
-		if(prioritySearch){
-			the_tree->annkPriSearch(	// search
-				pq,	// query point
-				k,		// number of near neighbors
-				nn_idx,		// nearest neighbors (returned)
-				dists,		// distance (returned)
-				error_bound);	// error bound			
-		} else{
+		
+		switch(searchtype){
+			case 1:
 			the_tree->annkSearch(	// search
 				pq,	// query point
 				k,		// number of near neighbors
 				nn_idx,		// nearest neighbors (returned)
 				dists,		// distance (returned)
 				error_bound);	// error bound			
+			break;
+			
+			case 2:  // Priority search
+			the_tree->annkPriSearch(pq, k, nn_idx, dists, error_bound);
+			break;
+			
+			case 3: // Fixed radius search 
+			the_tree->annkFRSearch(	// search
+				pq,	// query point
+				sqRad, // Squared radius
+				k,		// number of near neighbors
+				nn_idx,		// nearest neighbors (returned)
+				dists,		// distance (returned)
+				error_bound);	// error bound			
+			break;
 		}
+		
 
 		for (int j = 0; j < k; j++)
 		{
