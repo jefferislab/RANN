@@ -49,9 +49,10 @@ nn2 <- function(data, query, k=min(10,nrow(data)),treetype=c("kd","bd"),
 
 	if(k>ND)
 		stop("Cannot find more nearest neighbours than there are points")
-		
-	searchtype=which(match.arg(searchtype)==c("standard","priority","radius"))
-	treetype=match.arg(treetype)
+	
+	searchtypeInt=pmatch(searchtype[1],c("standard","priority","radius"))
+	if(is.na(searchtypeInt)) stop(paste("Unknown search type",searchtype))
+	treetype=match.arg(treetype,c("kd","bd"))
 
 	# Coerce to matrix form
 	if(is.data.frame(data))
@@ -72,7 +73,7 @@ nn2 <- function(data, query, k=min(10,nrow(data)),treetype=c("kd","bd"),
 		as.integer(NQ),
 		as.integer(k),
 		as.double(eps),
-		as.integer(searchtype), 
+		as.integer(searchtypeInt), 
 		as.integer(treetype=="bd"), 
 		as.double(radius*radius),
 		nn.idx   = integer(k*NQ),
