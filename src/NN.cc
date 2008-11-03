@@ -123,7 +123,7 @@ extern "C"
 	int d_ptr[d];
 	int ptr = 0;
 	
-	// Next 2 for loops are concerned with getting the linear R array into the ANN format
+	// set up column offsets for query point matrix (to convert Row/Col major)
 	for(int i = 0; i < d; i++)
 	{
 		d_ptr[i] = i*nd;
@@ -139,14 +139,11 @@ extern "C"
 	
 	if(usebdtree){
 		the_tree = new ANNbd_tree(	// Build search structure
-				data_pts,		// The data points
-				nd,			// Number of points
-				d);		// Dimension of space				
+				data_pts,			// The data points
+				nd,					// Number of data points
+				d);					// Dimension of space				
 	} else {
-		the_tree = new ANNkd_tree(	// Build search structure
-				data_pts,		// The data points
-				nd,			// Number of points
-				d);		// Dimension of space		
+		the_tree = new ANNkd_tree( data_pts, nd, d);
 	}
 
 	// set up offsets for query point matrix (to convert Row / Col major)
@@ -179,13 +176,7 @@ extern "C"
 			break;
 			
 			case 3: // Fixed radius search 
-			the_tree->annkFRSearch(	// search
-				pq,	// query point
-				sqRad, // Squared radius
-				k,		// number of near neighbors
-				nn_idx,		// nearest neighbors (returned)
-				dists,		// distance (returned)
-				error_bound);	// error bound			
+			the_tree->annkFRSearch(	pq,	sqRad, k, nn_idx, dists,error_bound);			
 			break;
 		}
 		
@@ -193,7 +184,7 @@ extern "C"
 		for (int j = 0; j < k; j++)
 		{
 			distances[ptr] = sqrt(dists[j]);	// unsquare distance
-			nn_index[ptr++]  = nn_idx[j] + 1;			// put indexes in returned array
+			nn_index[ptr++]  = nn_idx[j] + 1;	// put indices in returned array
 		}
 	}
 
