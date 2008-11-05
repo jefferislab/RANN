@@ -89,6 +89,7 @@
 
 #include <cmath>			// math includes
 #include <iostream>			// I/O streams
+#include <cstdlib>			// GJ: For exit
 
 //----------------------------------------------------------------------
 // Limits
