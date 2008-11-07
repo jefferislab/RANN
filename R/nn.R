@@ -27,7 +27,7 @@ nn <- function(data, mask=rep.int(1, times=ncol(data)-1), p=min(10,nrow(data)))
 		as.integer(dimension),
 		as.integer(M),
 		nn.idx   = integer(p*M),
-		nn       = double(p*M), PACKAGE="knnFinder")
+		nn       = double(p*M), PACKAGE="RANN")
 		
 	# now put the returned vectors into (M x p) arrays
 	nn.indexes=matrix(results$nn.idx,ncol=p,byrow=TRUE)
@@ -77,7 +77,7 @@ nn2 <- function(data, query, k=min(10,nrow(data)),treetype=c("kd","bd"),
 		as.integer(treetype=="bd"), 
 		as.double(radius*radius),
 		nn.idx   = integer(k*NQ),
-		nn       = double(k*NQ), PACKAGE="knnFinder")
+		nn       = double(k*NQ), PACKAGE="RANN")
 		
 	# now put the returned vectors into (nq x k) arrays
 	nn.indexes=matrix(results$nn.idx,ncol=k,byrow=TRUE)
