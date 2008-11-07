@@ -27,7 +27,7 @@ nn2(data, query, k=min(10,nrow(data)),treetype=c("kd","bd"),
 \details{
 The algorithm itself works by calculating the nearest neighbour distances in input space. This calculation
 is achieved in O(N log N) time, where N is the number of data points using Bentley's kd-tree. The
-\code{knnFinder} package utilizes the Approximate Near Neighbor (ANN) C++ library, which can give the exact near
+\code{RANN} package utilizes the Approximate Near Neighbor (ANN) C++ library, which can give the exact near
 neighbours or (as the name suggests) approximate near neighbours to within a specified error bound. We use EXACT near neighbours in \code{nn} but \code{nn2} provides options for approximate searches. For more
 information on the ANN library please visit \url{http://www.cs.umd.edu/~mount/ANN/}.
 
