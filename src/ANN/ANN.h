@@ -1,11 +1,11 @@
 //----------------------------------------------------------------------
 // File:			ANN.h
 // Programmer:		Sunil Arya and David Mount
-// Last modified:	05/03/05 (Release 1.1)
 // Description:		Basic include file for approximate nearest
 //					neighbor searching.
+// Last modified:	01/27/10 (Version 1.1.2)
 //----------------------------------------------------------------------
-// Copyright (c) 1997-2005 University of Maryland and Sunil Arya and
+// Copyright (c) 1997-2010 University of Maryland and Sunil Arya and
 // David Mount.  All Rights Reserved.
 // 
 // This software and related documentation is part of the Approximate
@@ -28,6 +28,8 @@
 //		Cleaned up C++ structure for modern compilers
 //	Revision 1.1  05/03/05
 //		Added fixed-radius k-NN searching
+//	Revision 1.1.2  01/27/10
+//		Fixed minor compilation bugs for new versions of gcc
 //----------------------------------------------------------------------
 
 //----------------------------------------------------------------------
@@ -87,10 +89,10 @@
 //  basic includes
 //----------------------------------------------------------------------
 
+#include <cstdlib>			// standard lib includes
 #include <cmath>			// math includes
 #include <iostream>			// I/O streams
-#include <cstdlib>			// GJ: For exit
-#include <cstring>			// GJ: For strcmp
+#include <cstring>			// C-style strings
 
 //----------------------------------------------------------------------
 // Limits
@@ -116,10 +118,10 @@
   const double ANN_DBL_MAX = DBL_MAX;
 #endif
 
-#define ANNversion 		"1.1.1"			// ANN version and information
+#define ANNversion 		"1.1.2"			// ANN version and information
 #define ANNversionCmt	""
 #define ANNcopyright	"David M. Mount and Sunil Arya"
-#define ANNlatestRev	"Aug 4, 2006"
+#define ANNlatestRev	"Jan 27, 2010"
 
 //----------------------------------------------------------------------
 //	ANNbool

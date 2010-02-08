@@ -1,8 +1,8 @@
 //----------------------------------------------------------------------
-//	File:			ANNx.h
-//	Programmer: 	Sunil Arya and David Mount
-//	Last modified:	03/04/98 (Release 0.1)
-//	Description:	Internal include file for ANN
+// File:			ANNx.h
+// Programmer: 		Sunil Arya and David Mount
+// Description:		Internal include file for ANN
+// Last modified:	01/27/10 (Version 1.1.2)
 //
 //	These declarations are of use in manipulating some of
 //	the internal data objects appearing in ANN, but are not
@@ -11,7 +11,7 @@
 //
 //	Typical users of ANN should not need to access this file.
 //----------------------------------------------------------------------
-// Copyright (c) 1997-2005 University of Maryland and Sunil Arya and
+// Copyright (c) 1997-2010 University of Maryland and Sunil Arya and
 // David Mount.  All Rights Reserved.
 // 
 // This software and related documentation is part of the Approximate
@@ -29,6 +29,8 @@
 //	    Initial release
 //	Revision 1.0  04/01/05
 //	    Changed LO, HI, IN, OUT to ANN_LO, ANN_HI, etc.
+//	Revision 1.1.2  01/27/10
+//		Fixed minor compilation bugs for new versions of gcc
 //----------------------------------------------------------------------
 
 #ifndef ANNx_H
@@ -61,7 +63,7 @@ extern int		ANNptsVisited;		// number of pts visited in search
 //----------------------------------------------------------------------
 
 void annError(					// ANN error routine
-	const char			*msg,		// error message
+	const char*		msg,		// error message
 	ANNerr			level);		// level of error
 
 void annPrintPt(				// print a point

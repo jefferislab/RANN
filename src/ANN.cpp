@@ -2,9 +2,9 @@
 // File:			ANN.cpp
 // Programmer:		Sunil Arya and David Mount
 // Description:		Methods for ANN.h and ANNx.h
-// Last modified:	01/04/05 (Version 1.0)
+// Last modified:	01/27/10 (Version 1.1.2)
 //----------------------------------------------------------------------
-// Copyright (c) 1997-2005 University of Maryland and Sunil Arya and
+// Copyright (c) 1997-2010 University of Maryland and Sunil Arya and
 // David Mount.  All Rights Reserved.
 // 
 // This software and related documentation is part of the Approximate
@@ -22,8 +22,11 @@
 //		Initial release
 //	Revision 1.0  04/01/05
 //		Added performance counting to annDist()
+//	Revision 1.1.2  01/27/10
+//		Fixed minor compilation bugs for new versions of gcc
 //----------------------------------------------------------------------
 
+#include <cstdlib>						// C standard lib defs
 #include <ANN/ANNx.h>					// all ANN includes
 #include <ANN/ANNperf.h>				// ANN performance 
 
@@ -163,7 +166,7 @@ ANNbool ANNorthRect::inside(int dim, ANNpoint p)
 //	Error handler
 //----------------------------------------------------------------------
 
-void annError(const char *msg, ANNerr level)
+void annError(const char* msg, ANNerr level)
 {
 	if (level == ANNabort) {
 		cerr << "ANN: ERROR------->" << msg << "<-------------ERROR\n";
