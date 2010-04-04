@@ -10,21 +10,16 @@ extern "C"
 	void get_NN(double *data, int *mask, int *sumMask, int *k, int *dim, int *m_pts, int *nn_index,
 		double *distances)
 	{
-	int		d;		// Actual Dimension
-	int		M;		// Number of Data points
-	double		error_bound;	// enough said!
-	int		numNN;		// Max. num of NN
+	const int d = *dim;		// Actual Dimension
+	const int M = *m_pts;		// Number of Data points
+	const double error_bound = 00.00;	// enough said!
+	const int numNN = *k;		// Max. num of NN
 	ANNpointArray	data_pts;	// Data points
 	ANNpointArray	output_pts;	// Query point
 	ANNidxArray	nn_idx;		// Near neighbor indices
 	ANNdistArray	dists;		// Near neighbor distances
 	ANNkd_tree	*the_tree;	// Search structure
 
-	d		= *dim;
-	M		= *m_pts;
-	numNN		= *k;
-	error_bound 	= 00.00;
-	
 	output_pts 	= annAllocPts(M, 1);		// Allocate query point
 	data_pts 	= annAllocPts(M, *sumMask);	// Allocate data points
 	// NB +1 is to allow for return of the point itself which will be
@@ -103,16 +98,16 @@ extern "C"
 	void get_NN_2Set(double *data, double *query, int *D, int *ND, int *NQ, int *K, double *EPS,
 		int *SEARCHTYPE, int *USEBDTREE, double *SQRAD, int *nn_index, double *distances)
 	{
-	int		d = *D;			// Number of Dimensions for points
-	int		nd = *ND;		// Number of Data points
-	int		nq= *NQ;		// Number of Query points
-	int		k = * K;		// Maximum number of Nearest Neighbours
+	const int d = *D;			// Number of Dimensions for points
+	const int nd = *ND;		// Number of Data points
+	const int nq= *NQ;		// Number of Query points
+	const int k = *K;		// Maximum number of Nearest Neighbours
 
-	int searchtype = *SEARCHTYPE;
-	bool usebdtree = *USEBDTREE?true:false;
+	const int searchtype = *SEARCHTYPE;
+	const bool usebdtree = *USEBDTREE?true:false;
 
-	double	error_bound = *EPS;	// enough said!
-	double  sqRad = *SQRAD;		// Squared Radius for rad search
+	const double error_bound = *EPS;	// enough said!
+	const double sqRad = *SQRAD;		// Squared Radius for rad search
 	
 	ANNkd_tree	*the_tree;	// Search structure
 
@@ -178,8 +173,7 @@ extern "C"
 			case 3: // Fixed radius search 
 			the_tree->annkFRSearch(	pq,	sqRad, k, nn_idx, dists,error_bound);			
 			break;
-		}
-		
+		}		
 
 		for (int j = 0; j < k; j++)
 		{
