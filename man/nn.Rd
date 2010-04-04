@@ -18,7 +18,8 @@ nn2(data, query, k=min(10,nrow(data)),treetype=c("kd","bd"),
   \item{query}{nn2: A set of points that will be queried against data - must have same number of columns.}
   \item{mask}{nn: A vector of 1's and 0's representing input inclusion/exclusion. The default mask is all
   1's (i.e. include all inputs in the test).}
-  \item{p or k}{The maximum number of near neighbours to compute. The default value is set to 10.}
+  \item{p}{nn:The maximum number of near neighbours to compute. The default value is set to 10.}
+  \item{k}{nn2:The maximum number of near neighbours to compute. The default value is set to 10.}
   \item{treetype}{nn2: Either the standard kd tree or a bd (box-decomposition, AMNSW98) tree which may perform better for larger point sets}
   \item{searchtype}{nn2: See details}
   \item{radius}{nn2: radius of search for searchtype='radius'}
