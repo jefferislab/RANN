@@ -27,12 +27,12 @@ extern "C"
 	nn_idx 		= new ANNidx[numNN+1];		// Allocate near neigh indices
 	dists 		= new ANNdist[numNN+1];		// Allocate near neighbor dists
 
-	int incOutputData 	= (d-1)*M;
-	int d_ptr[d-1];
+	int incOutputData = (d-1)*M;
+	int *d_ptr = new int[d-1];
 	int ptr = 0;
 
 	// Next 2 for loops are concerned with getting the linear R array into the ANN format
-	for(int i = 0; i < d-1; i++)
+	for(int i = 0; i < (d-1); i++)
 	{
 		d_ptr[i] = 0;
 		d_ptr[i] = i*M;
@@ -93,12 +93,13 @@ extern "C"
 	delete nn_idx;
 	delete dists;
 	delete the_tree;
+	delete [] d_ptr;
 	}
 	
 	void get_NN_2Set(double *data, double *query, int *D, int *ND, int *NQ, int *K, double *EPS,
 		int *SEARCHTYPE, int *USEBDTREE, double *SQRAD, int *nn_index, double *distances)
 	{
-	const int d = *D;			// Number of Dimensions for points
+	const int d = *D;		// Number of Dimensions for points
 	const int nd = *ND;		// Number of Data points
 	const int nq= *NQ;		// Number of Query points
 	const int k = *K;		// Maximum number of Nearest Neighbours
@@ -115,7 +116,7 @@ extern "C"
 	ANNidxArray nn_idx 		= new ANNidx[k];		// Allocate near neigh indices
 	ANNdistArray dists 		= new ANNdist[k];		// Allocate near neighbor dists
 
-	int d_ptr[d];
+	int *d_ptr = new int[d];
 	int ptr = 0;
 	
 	// set up column offsets for query point matrix (to convert Row/Col major)
@@ -187,6 +188,7 @@ extern "C"
 	annDeallocPts(data_pts);
 	delete [] nn_idx;
 	delete [] dists;
+	delete [] d_ptr;
 	delete the_tree;
 	}
 }
