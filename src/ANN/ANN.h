@@ -334,7 +334,7 @@ const ANNbool	ANN_ALLOW_SELF_MATCH	= ANNtrue;
 //	Use the following for the Euclidean norm
 //----------------------------------------------------------------------
 #define ANN_POW(v)			((v)*(v))
-#define ANN_ROOT(x)			sqrt(x)
+#define ANN_ROOT(x)			std::sqrt(x)
 #define ANN_SUM(x,y)		((x) + (y))
 #define ANN_DIFF(x,y)		((y) - (x))
 

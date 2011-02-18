@@ -110,7 +110,7 @@ public :
 	double mean() { return sum/n; } // mean
 
 									// standard deviation
-	double stdDev() { return sqrt((sum2 - (sum*sum)/n)/(n-1));}
+	double stdDev() { return std::sqrt((sum2 - (sum*sum)/n)/(n-1));}
 
 	double min() { return minVal; } // minimum
 	double max() { return maxVal; } // maximum
