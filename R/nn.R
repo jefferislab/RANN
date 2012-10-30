@@ -4,7 +4,7 @@
 
 
 
-#'Near Neighbour Search
+#'Nearest Neighbour Search
 #'
 #'Uses a kd-tree to find the p number of near neighbours for each point in an
 #'input/output dataset. The advantage of the kd-tree is that it runs in O(M log
@@ -45,10 +45,9 @@
 #'@param radius nn2: radius of search for searchtype='radius'
 #'@param eps nn2: error bound: default of 0.0 implies exact nearest neighbour
 #'search
-#'@return
-#'@returnItem nn.idx A MxP data.frame returning the near neighbour indexes.
-#'@returnItem nn.dists A MxP data.frame returning the near neighbour Euclidean
-#'distances.
+#'@return A list of length 2 with elements, nn.idx and nn.dists
+#'\item{nn.idx}{A MxP data.frame returning the near neighbour indexes.}
+#'\item{nn.dists}{A MxP data.frame returning the near neighbour Euclidean distances.}
 #'@author Samuel E. Kemp. To report any bugs or suggestions please email:
 #'\email{sekemp@@glam.ac.uk} Gregory Jefferis. \email{jefferis@@gmail.com}
 #'@references Bentley J. L. (1975), Multidimensional binary search trees used
@@ -70,7 +69,8 @@
 #'y <- sin(x1) + 2*cos(x2) + e
 #'DATA <- data.frame(x1, x2, y)		
 #'nearest <- nn(DATA)
-#'
+#'@export
+#'@rdname nn
 nn <- function(data, mask=rep.int(1, times=ncol(data)-1), p=min(10,nrow(data)))
 {
 	# Coerce to matrix form
@@ -105,6 +105,9 @@ nn <- function(data, mask=rep.int(1, times=ncol(data)-1), p=min(10,nrow(data)))
 	return(list(nn.idx=data.frame(nn.indexes), nn.dists=data.frame(nn.dist)))
 }
 
+#' @export
+#' @rdname nn
+#' @author jefferis
 nn2 <- function(data, query, k=min(10,nrow(data)),treetype=c("kd","bd"),
 	searchtype=c("standard","priority","radius"),radius=0.0,eps=0.0)
 {
