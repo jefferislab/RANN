@@ -1,8 +1,16 @@
 Package: RANN
 Title: Fast Nearest Neighbour Search
-Version: 2.1.3
-Date: 2010-02-10
+Version: 2.1.4
+Date: 2012-10-30
 Author: Samuel E. Kemp, Gregory Jefferis
-Description: Finds the k nearest neighbours for every point in a given dataset in O(N log N) time using Arya and Mount's ANN library (v1.1.1).  Two functions allow searches for nearest neighbours within a point set or between two separate point sets. There is support for approximate as well as exact searches, fixed radius searches and bd as well as kd trees. This version updates ANN 1.1.3 and fixes package compilation on Windows.
+Description: Finds the k nearest neighbours for every point in a given dataset
+    in O(N log N) time using Arya and Mount's ANN library (v1.1.3).  Two
+    functions allow searches for nearest neighbours within a point set or
+    between two separate point sets. There is support for approximate as well
+    as exact searches, fixed radius searches and bd as well as kd trees.
 Maintainer: Gregory Jefferis <jefferis@gmail.com>
 License: GPL-2
+Collate:
+    'RANN-package.R'
+    'nn.R'
+    'zzz.R'

@@ -1,0 +1,6 @@
+RANN 2.2.0
+==========
+* no user-visible changes in theory
+* switch to roxygen2 for documentation
+* use this to provide a NAMESPACE as requested for CRAN
+* and switch from deprecated .First.lib to useDynLib
