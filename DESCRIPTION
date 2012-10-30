@@ -1,6 +1,6 @@
 Package: RANN
 Title: Fast Nearest Neighbour Search
-Version: 2.1.4
+Version: 2.2.0
 Date: 2012-10-30
 Author: Samuel E. Kemp, Gregory Jefferis
 Description: Finds the k nearest neighbours for every point in a given dataset
