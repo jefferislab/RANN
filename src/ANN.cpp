@@ -29,6 +29,9 @@
 #include <cstdlib>						// C standard lib defs
 #include <ANN/ANNx.h>					// all ANN includes
 #include <ANN/ANNperf.h>				// ANN performance 
+#ifdef RANN
+#include <R.h>				// R headers for error handling
+#endif
 
 using namespace std;					// make std:: accessible
 
@@ -169,11 +172,19 @@ ANNbool ANNorthRect::inside(int dim, ANNpoint p)
 void annError(const char* msg, ANNerr level)
 {
 	if (level == ANNabort) {
+#ifdef RANN
+		error("RANN: %s",msg);
+#else
 		cerr << "ANN: ERROR------->" << msg << "<-------------ERROR\n";
 		exit(1);
+#endif
 	}
 	else {
+#ifdef RANN
+		warning("RANN: %s",msg);
+#else
 		cerr << "ANN: WARNING----->" << msg << "<-------------WARNING\n";
+#endif
 	}
 }
 
