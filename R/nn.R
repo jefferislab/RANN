@@ -48,8 +48,7 @@
 #'@return A list of length 2 with elements, nn.idx and nn.dists
 #'\item{nn.idx}{A MxP data.frame returning the near neighbour indexes.}
 #'\item{nn.dists}{A MxP data.frame returning the near neighbour Euclidean distances.}
-#'@author Samuel E. Kemp. To report any bugs or suggestions please email:
-#'\email{sekemp@@glam.ac.uk} Gregory Jefferis. \email{jefferis@@gmail.com}
+#'@author Original nn code by Samuel E. Kemp. nn2 and updates by Gregory Jefferis.
 #'@references Bentley J. L. (1975), Multidimensional binary search trees used
 #'for associative search. Communication ACM, 18:309-517.
 #'

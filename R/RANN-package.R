@@ -1,4 +1,4 @@
-#' Wrapper for Arya and Mount's Approximat Nearest Neighbours (ANN) C++ library
+#' Wrapper for Arya and Mount's Approximate Nearest Neighbours (ANN) C++ library
 #' 
 #' @name RANN-package
 #' @aliases RANN

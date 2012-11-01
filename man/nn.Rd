@@ -84,9 +84,8 @@ DATA <- data.frame(x1, x2, y)
 nearest <- nn(DATA)
 }
 \author{
-  Samuel E. Kemp. To report any bugs or suggestions please
-  email: \email{sekemp@glam.ac.uk} Gregory Jefferis.
-  \email{jefferis@gmail.com}
+  Original nn code by Samuel E. Kemp. nn2 and updates by
+  Gregory Jefferis.
 
   jefferis
 }

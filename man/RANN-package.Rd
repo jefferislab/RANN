@@ -2,9 +2,9 @@
 \name{RANN-package}
 \alias{RANN}
 \alias{RANN-package}
-\title{Wrapper for Arya and Mount's Approximat Nearest Neighbours (ANN) C++ library}
+\title{Wrapper for Arya and Mount's Approximate Nearest Neighbours (ANN) C++ library}
 \description{
-  Wrapper for Arya and Mount's Approximat Nearest
+  Wrapper for Arya and Mount's Approximate Nearest
   Neighbours (ANN) C++ library
 }
 \seealso{
