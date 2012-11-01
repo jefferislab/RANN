@@ -1,3 +1,8 @@
+RANN 2.2.1
+==========
+* fix yet more warnings for CRAN due to presence in ANN of 
+  exit(), std:cout and std:cerr
+
 RANN 2.2.0
 ==========
 * no user-visible changes in theory
