@@ -1,44 +1,32 @@
-\name{nn}
+\name{nn2}
 \alias{nn}
 \alias{nn2}
 \title{Nearest Neighbour Search}
 \usage{
-  nn(data, mask = rep.int(1, times = ncol(data) - 1),
-    p = min(10, nrow(data)))
-
   nn2(data, query, k = min(10, nrow(data)),
     treetype = c("kd", "bd"),
     searchtype = c("standard", "priority", "radius"),
     radius = 0, eps = 0)
 }
 \arguments{
-  \item{data}{An input-output dataset. FOR nn THE OUTPUT
-  MUST BE IN THE RIGHT MOST COLUMN OF A DATA FRAME OR
-  MATRIX. nn2 uses ALL columns.}
+  \item{data}{A data frame or matrix where each row is a
+  point.}
 
-  \item{query}{nn2: A set of points that will be queried
-  against data - must have same number of columns.}
+  \item{query}{A set of points that will be queried against
+  data - must have same number of columns.}
 
-  \item{mask}{nn: A vector of 1's and 0's representing
-  input inclusion/exclusion. The default mask is all 1's
-  (i.e. include all inputs in the test).}
-
-  \item{p}{nn:The maximum number of near neighbours to
+  \item{k}{The maximum number of near neighbours to
   compute. The default value is set to 10.}
 
-  \item{k}{nn2:The maximum number of near neighbours to
-  compute. The default value is set to 10.}
-
-  \item{treetype}{nn2: Either the standard kd tree or a bd
+  \item{treetype}{Either the standard kd tree or a bd
   (box-decomposition, AMNSW98) tree which may perform
   better for larger point sets}
 
-  \item{searchtype}{nn2: See details}
+  \item{searchtype}{See details}
 
-  \item{radius}{nn2: radius of search for
-  searchtype='radius'}
+  \item{radius}{radius of search for searchtype='radius'}
 
-  \item{eps}{nn2: error bound: default of 0.0 implies exact
+  \item{eps}{error bound: default of 0.0 implies exact
   nearest neighbour search}
 }
 \value{
@@ -53,17 +41,12 @@
   of the kd-tree is that it runs in O(M log M) time.
 }
 \details{
-  The algorithm itself works by calculating the nearest
-  neighbour distances in input space. This calculation is
-  achieved in O(N log N) time, where N is the number of
-  data points using Bentley's kd-tree. The \code{RANN}
-  package utilizes the Approximate Near Neighbor (ANN) C++
-  library, which can give the exact near neighbours or (as
-  the name suggests) approximate near neighbours to within
-  a specified error bound. We use EXACT near neighbours in
-  \code{nn} but \code{nn2} provides options for approximate
-  searches. For more information on the ANN library please
-  visit \url{http://www.cs.umd.edu/~mount/ANN/}.
+  The \code{RANN} package utilizes the Approximate Near
+  Neighbor (ANN) C++ library, which can give the exact near
+  neighbours or (as the name suggests) approximate near
+  neighbours to within a specified error bound.  For more
+  information on the ANN library please visit
+  \url{http://www.cs.umd.edu/~mount/ANN/}.
 
   Search types: \code{priority} visits cells in increasing
   order of distance from the query point, and hence, should
@@ -75,19 +58,14 @@
   contain 1.340781e+154 for that point.
 }
 \examples{
-# A noisy sine wave example
 x1 <- runif(100, 0, 2*pi)
 x2 <- runif(100, 0,3)
-e  <- rnorm(100, sd=sqrt(0.075))
-y <- sin(x1) + 2*cos(x2) + e
-DATA <- data.frame(x1, x2, y)
-nearest <- nn(DATA)
+DATA <- data.frame(x1, x2)
+nearest <- nn2(DATA,DATA)
 }
 \author{
-  Original nn code by Samuel E. Kemp. nn2 and updates by
-  Gregory Jefferis.
-
-  jefferis
+  Gregory Jefferis based on earlier code by Samuel E. Kemp
+  (knnFinder package)
 }
 \references{
   Bentley J. L. (1975), Multidimensional binary search

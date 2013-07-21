@@ -2,7 +2,7 @@
 #' 
 #' @name RANN-package
 #' @aliases RANN
-#' @seealso \code{\link{nn}, \link{nn2}}
+#' @seealso \code{\link{nn2}}
 #' @docType package
 #' @keywords package
 NULL

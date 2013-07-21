@@ -8,7 +8,7 @@
   Neighbours (ANN) C++ library
 }
 \seealso{
-  \code{\link{nn}, \link{nn2}}
+  \code{\link{nn2}}
 }
 \keyword{package}
 

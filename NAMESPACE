@@ -1,3 +1,2 @@
-export(nn)
 export(nn2)
 useDynLib(RANN)

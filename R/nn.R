@@ -10,15 +10,11 @@
 #'input/output dataset. The advantage of the kd-tree is that it runs in O(M log
 #'M) time.
 #'
-#'The algorithm itself works by calculating the nearest neighbour distances in
-#'input space. This calculation is achieved in O(N log N) time, where N is the
-#'number of data points using Bentley's kd-tree. The \code{RANN} package
+#'The \code{RANN} package
 #'utilizes the Approximate Near Neighbor (ANN) C++ library, which can give the
 #'exact near neighbours or (as the name suggests) approximate near neighbours
-#'to within a specified error bound. We use EXACT near neighbours in \code{nn}
-#'but \code{nn2} provides options for approximate searches. For more
-#'information on the ANN library please visit
-#'\url{http://www.cs.umd.edu/~mount/ANN/}.
+#'to within a specified error bound.  For more information on the ANN library
+#'please visit \url{http://www.cs.umd.edu/~mount/ANN/}.
 #'
 #'Search types: \code{priority} visits cells in increasing order of distance
 #'from the query point, and hence, should converge more rapidly on the true
@@ -27,28 +23,22 @@
 #'point.  If there are no neighbours then nn.idx will contain 0 and nn.dists
 #'will contain 1.340781e+154 for that point.
 #'
-#'@aliases nn nn2
-#'@param data An input-output dataset. FOR nn THE OUTPUT MUST BE IN THE RIGHT
-#'MOST COLUMN OF A DATA FRAME OR MATRIX. nn2 uses ALL columns.
-#'@param query nn2: A set of points that will be queried against data - must
+#'@aliases nn
+#'@param data A data frame or matrix where each row is a point.
+#'@param query A set of points that will be queried against data - must
 #'have same number of columns.
-#'@param mask nn: A vector of 1's and 0's representing input
-#'inclusion/exclusion. The default mask is all 1's (i.e. include all inputs in
-#'the test).
-#'@param p nn:The maximum number of near neighbours to compute. The default
+#'@param k The maximum number of near neighbours to compute. The default
 #'value is set to 10.
-#'@param k nn2:The maximum number of near neighbours to compute. The default
-#'value is set to 10.
-#'@param treetype nn2: Either the standard kd tree or a bd (box-decomposition,
+#'@param treetype Either the standard kd tree or a bd (box-decomposition,
 #'AMNSW98) tree which may perform better for larger point sets
-#'@param searchtype nn2: See details
-#'@param radius nn2: radius of search for searchtype='radius'
-#'@param eps nn2: error bound: default of 0.0 implies exact nearest neighbour
+#'@param searchtype See details
+#'@param radius radius of search for searchtype='radius'
+#'@param eps error bound: default of 0.0 implies exact nearest neighbour
 #'search
 #'@return A list of length 2 with elements, nn.idx and nn.dists
 #'\item{nn.idx}{A MxP data.frame returning the near neighbour indexes.}
 #'\item{nn.dists}{A MxP data.frame returning the near neighbour Euclidean distances.}
-#'@author Original nn code by Samuel E. Kemp. nn2 and updates by Gregory Jefferis.
+#'@author Gregory Jefferis based on earlier code by Samuel E. Kemp (knnFinder package)
 #'@references Bentley J. L. (1975), Multidimensional binary search trees used
 #'for associative search. Communication ACM, 18:309-517.
 #'
@@ -61,52 +51,12 @@
 #'@keywords nonparametric
 #'@examples
 #'
-#'# A noisy sine wave example
 #'x1 <- runif(100, 0, 2*pi)
 #'x2 <- runif(100, 0,3)
-#'e  <- rnorm(100, sd=sqrt(0.075)) 
-#'y <- sin(x1) + 2*cos(x2) + e
-#'DATA <- data.frame(x1, x2, y)		
-#'nearest <- nn(DATA)
-#'@export
+#'DATA <- data.frame(x1, x2)
+#'nearest <- nn2(DATA,DATA)
 #'@rdname nn
-nn <- function(data, mask=rep.int(1, times=ncol(data)-1), p=min(10,nrow(data)))
-{
-	# Coerce to matrix form
-	if(!is.matrix(data))
-		data <- data.matrix(data)
-	
-	# Check that this is an input/output dataset
-	if(ncol(data) <= 1)
-		stop("Please make this an input/output dataset.")	
-
-	if(p>nrow(data))
-		stop("Cannot find more nearest neighbours than there are points")
-		
-	num.inputs 	<- sum(mask)
-	dimension	<- ncol(data)
-	M		    <- nrow(data)
-	
-	results <- .C("get_NN",
-		as.matrix(data),
-		as.integer(mask),
-		as.integer(num.inputs),
-		as.integer(p),
-		as.integer(dimension),
-		as.integer(M),
-		nn.idx   = integer(p*M),
-		nn       = double(p*M), PACKAGE="RANN")
-		
-	# now put the returned vectors into (M x p) arrays
-	nn.indexes=matrix(results$nn.idx,ncol=p,byrow=TRUE)
-	nn.dist=matrix(results$nn,ncol=p,byrow=TRUE)
-
-	return(list(nn.idx=data.frame(nn.indexes), nn.dists=data.frame(nn.dist)))
-}
-
-#' @export
-#' @rdname nn
-#' @author jefferis
+#'@export
 nn2 <- function(data, query, k=min(10,nrow(data)),treetype=c("kd","bd"),
 	searchtype=c("standard","priority","radius"),radius=0.0,eps=0.0)
 {
@@ -155,4 +105,15 @@ nn2 <- function(data, query, k=min(10,nrow(data)),treetype=c("kd","bd"),
 	nn.dist=matrix(results$nn,ncol=k,byrow=TRUE)
 
 	return(list(nn.idx=nn.indexes, nn.dists=nn.dist))
+}
+
+#'Defunct functions in RANN package
+#'
+#'C code underlying nn() contained memory leaks.
+#'nn2 is a more flexible and efficient alternative.
+#'
+#'@param ... Ignored
+#'@rdname RANN-defunct
+nn<-function(...){
+	.Defunct('nn2')
 }
