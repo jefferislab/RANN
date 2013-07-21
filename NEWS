@@ -1,3 +1,8 @@
+RANN 2.3.0
+==========
+* remove nn() function since underlying get_NN() had memory leaks (noticed by Brian Ripley)
+* add Arya and Mount as authors (in accordance with CRAN policies, again BDR)
+
 RANN 2.2.1
 ==========
 * fix yet more warnings for CRAN due to presence in ANN of 
