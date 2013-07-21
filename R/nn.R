@@ -23,10 +23,9 @@
 #'point.  If there are no neighbours then nn.idx will contain 0 and nn.dists
 #'will contain 1.340781e+154 for that point.
 #'
-#'@aliases nn
 #'@param data A data frame or matrix where each row is a point.
 #'@param query A set of points that will be queried against data - must
-#'have same number of columns.
+#'have same number of columns. If missing, uses data.
 #'@param k The maximum number of near neighbours to compute. The default
 #'value is set to 10.
 #'@param treetype Either the standard kd tree or a bd (box-decomposition,
@@ -55,9 +54,8 @@
 #'x2 <- runif(100, 0,3)
 #'DATA <- data.frame(x1, x2)
 #'nearest <- nn2(DATA,DATA)
-#'@rdname nn
 #'@export
-nn2 <- function(data, query, k=min(10,nrow(data)),treetype=c("kd","bd"),
+nn2 <- function(data, query=data, k=min(10,nrow(data)),treetype=c("kd","bd"),
 	searchtype=c("standard","priority","radius"),radius=0.0,eps=0.0)
 {
 	dimension	<- ncol(data)

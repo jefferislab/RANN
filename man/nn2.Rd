@@ -1,9 +1,8 @@
 \name{nn2}
-\alias{nn}
 \alias{nn2}
 \title{Nearest Neighbour Search}
 \usage{
-  nn2(data, query, k = min(10, nrow(data)),
+  nn2(data, query = data, k = min(10, nrow(data)),
     treetype = c("kd", "bd"),
     searchtype = c("standard", "priority", "radius"),
     radius = 0, eps = 0)
@@ -13,7 +12,8 @@
   point.}
 
   \item{query}{A set of points that will be queried against
-  data - must have same number of columns.}
+  data - must have same number of columns. If missing, uses
+  data.}
 
   \item{k}{The maximum number of near neighbours to
   compute. The default value is set to 10.}
