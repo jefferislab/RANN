@@ -1,7 +1,12 @@
 RANN 2.3.0
 ==========
 * remove nn() function since underlying get_NN() had memory leaks (noticed by Brian Ripley)
+* make nn2() use input data as query when query not specified)
 * add Arya and Mount as authors (in accordance with CRAN policies, again BDR)
+* add Arya, Mount and University of Maryland in Copyright line
+  (in accordance with CRAN policies, again BDR)
+* add COPYRIGHT file to make it clear exactly which files are from the ANN
+  library and therefore subject to that library's copyright.
 
 RANN 2.2.1
 ==========
