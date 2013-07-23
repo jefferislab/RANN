@@ -107,11 +107,14 @@ nn2 <- function(data, query=data, k=min(10,nrow(data)),treetype=c("kd","bd"),
 
 #'Defunct functions in RANN package
 #'
-#'C code underlying nn() contained memory leaks.
-#'nn2 is a more flexible and efficient alternative.
-#'
-#'@param ... Ignored
+#'@name RANN-defunct
+NULL
+
+#'@details C code underlying nn() contained memory leaks.
+#'\code{\link{nn2}} is a more flexible and efficient alternative.
 #'@rdname RANN-defunct
+#'@param ... Ignored
+#'@export
 nn<-function(...){
-	.Defunct('nn2')
+	.Defunct('nn2',package='RANN')
 }

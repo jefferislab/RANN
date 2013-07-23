@@ -1,4 +1,5 @@
-\name{nn}
+\name{RANN-defunct}
+\alias{RANN-defunct}
 \alias{nn}
 \title{Defunct functions in RANN package}
 \usage{
@@ -8,7 +9,11 @@
   \item{...}{Ignored}
 }
 \description{
-  C code underlying nn() contained memory leaks. nn2 is a
-  more flexible and efficient alternative.
+  Defunct functions in RANN package
+}
+\details{
+  C code underlying nn() contained memory leaks.
+  \code{\link{nn2}} is a more flexible and efficient
+  alternative.
 }
 
