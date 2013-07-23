@@ -1,13 +1,11 @@
 # RANN
 
 ## Installation
-Currently there isn't a released version on [CRAN](http://cran.r-project.org/).
-
 ### Released versions
-The recommendation is to install from our lab repository:
+The recommendation is to install the released version from [CRAN](http://cran.r-project.org/) by doing:
 
 ```r
-install.packages("RANN",repos='http://jefferislab.org/R',type='source')
+install.packages("RANN")
 ```
 
 ### Bleeding Edge
