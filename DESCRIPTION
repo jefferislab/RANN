@@ -1,7 +1,7 @@
 Package: RANN
 Title: Fast Nearest Neighbour Search (wraps Arya and Mount's ANN library)
 Version: 2.3.0
-Date: 2013-07-22
+Date: 2013-07-23
 Author: Sunil Arya and David Mount (for ANN), Samuel E. Kemp, Gregory Jefferis
 Copyright: ANN library is copyright University of Maryland and Sunil Arya and
     David Mount. See file COPYRIGHT for details.
