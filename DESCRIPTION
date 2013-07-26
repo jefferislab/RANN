@@ -11,6 +11,7 @@ Description: Finds the k nearest neighbours for every point in a given dataset
     and bd as well as kd trees.
 Maintainer: Gregory Jefferis <jefferis@gmail.com>
 License: GPL (>=3)
+Url: https://github.com/jefferis/RANN
 Collate:
     'RANN-package.R'
     'nn.R'
