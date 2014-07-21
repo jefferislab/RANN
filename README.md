@@ -23,10 +23,17 @@ You can, however, download the [tar ball](https://github.com/jefferis/RANN/tarba
 # install.packages("devtools")
 
 library(devtools)
-install_github("RANN", "jefferis")
+install_github("jefferis/RANN")
 ```
 
 Note: Windows users need [Rtools](http://www.murdoch-sutherland.com/Rtools/) and [devtools](http://CRAN.R-project.org/package=devtools) to install this way.
+
+## Feedback
+Please feel free to:
+
+* submit suggestions and bug-reports at: <https://github.com/jefferis/RANN/issues>
+* send pull requests after forking: <https://github.com/jefferis/RANN/>
+* e-mail the maintainer: <jefferis@gmail.com>
 
 ## Copyright and License
 see [inst/COPYRIGHT](inst/COPYRIGHT) and [DESCRIPTION](DESCRIPTION) files for copyright and license information.
