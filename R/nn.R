@@ -6,47 +6,54 @@
 
 #'Nearest Neighbour Search
 #'
-#'Uses a kd-tree to find the p number of near neighbours for each point in an
-#'input/output dataset. The advantage of the kd-tree is that it runs in O(M log
+#'Uses a kd-tree to find the p number of near neighbours for each point in an 
+#'input/output dataset. The advantage of the kd-tree is that it runs in O(M log 
 #'M) time.
 #'
-#'The \code{RANN} package
-#'utilizes the Approximate Near Neighbor (ANN) C++ library, which can give the
-#'exact near neighbours or (as the name suggests) approximate near neighbours
-#'to within a specified error bound.  For more information on the ANN library
-#'please visit \url{http://www.cs.umd.edu/~mount/ANN/}.
+#'The \code{RANN} package utilizes the Approximate Near Neighbor (ANN) C++ 
+#'library, which can give the exact near neighbours or (as the name suggests) 
+#'approximate near neighbours to within a specified error bound.  For more 
+#'information on the ANN library please visit 
+#'\url{http://www.cs.umd.edu/~mount/ANN/}.
 #'
-#'Search types: \code{priority} visits cells in increasing order of distance
-#'from the query point, and hence, should converge more rapidly on the true
-#'nearest neighbour, but standard is usually faster for exact searches.
-#'\code{radius} only searches for neighbours within a specified radius of the
-#'point.  If there are no neighbours then nn.idx will contain 0 and nn.dists
+#'Search types: \code{priority} visits cells in increasing order of distance 
+#'from the query point, and hence, should converge more rapidly on the true 
+#'nearest neighbour, but standard is usually faster for exact searches. 
+#'\code{radius} only searches for neighbours within a specified radius of the 
+#'point.  If there are no neighbours then nn.idx will contain 0 and nn.dists 
 #'will contain 1.340781e+154 for that point.
 #'
-#'@param data A data frame or matrix where each row is a point.
-#'@param query A set of points that will be queried against data - must
-#'have same number of columns. If missing, uses data.
-#'@param k The maximum number of near neighbours to compute. The default
-#'value is set to 10.
-#'@param treetype Either the standard kd tree or a bd (box-decomposition,
-#'AMNSW98) tree which may perform better for larger point sets
+#'@param data An \bold{M} x \bold{d} data.frame or matrix, where each of the 
+#'  \bold{M} rows is a point or a (column) vector (where \bold{d=1}).
+#'@param query A set of \bold{N} x \bold{d} points that will be queried against 
+#'  \code{data}. \bold{d}, the number of columns, must be the same as 
+#'  \code{data}. If missing, defaults to \code{data}.
+#'@param k The maximum number of nearest neighbours to compute. The default 
+#'  value is set to the smaller of the number of columsn in data
+#'@param treetype Character vector specifying the standard \code{'kd'} tree or a
+#'  \code{'bd'} (box-decomposition, AMNSW98) tree which may perform better for 
+#'  larger point sets
 #'@param searchtype See details
-#'@param radius radius of search for searchtype='radius'
-#'@param eps error bound: default of 0.0 implies exact nearest neighbour
-#'search
-#'@return A list of length 2 with elements, nn.idx and nn.dists
-#'\item{nn.idx}{A MxP data.frame returning the near neighbour indexes.}
-#'\item{nn.dists}{A MxP data.frame returning the near neighbour Euclidean distances.}
-#'@author Gregory Jefferis based on earlier code by Samuel E. Kemp (knnFinder package)
-#'@references Bentley J. L. (1975), Multidimensional binary search trees used
-#'for associative search. Communication ACM, 18:309-517.
-#'
-#'Arya S. and Mount D. M. (1993), Approximate nearest neighbor searching, Proc.
-#'4th Ann. ACM-SIAM Symposium on Discrete Algorithms (SODA'93), 271-280.
-#'
-#'Arya S., Mount D. M., Netanyahu N. S., Silverman R. and Wu A. Y (1998), An
-#'optimal algorithm for approximate nearest neighbor searching, Journal of the
-#'ACM, 45, 891-923.
+#'@param radius Radius of search for searchtype='radius'
+#'@param eps Error bound: default of 0.0 implies exact nearest neighbour search
+#'@return A \code{list} of length 2 with elements:
+#'  
+#'  \item{nn.idx}{A \bold{N} x \bold{k} integer \code{matrix} returning the near
+#'  neighbour indices.}
+#'  
+#'  \item{nn.dists}{A \bold{N} x \bold{k} \code{matrix} returning the near 
+#'  neighbour Euclidean distances.}
+#'@author Gregory Jefferis based on earlier code by Samuel E. Kemp (knnFinder 
+#'  package)
+#'@references Bentley J. L. (1975), Multidimensional binary search trees used 
+#'  for associative search. Communication ACM, 18:309-517.
+#'  
+#'  Arya S. and Mount D. M. (1993), Approximate nearest neighbor searching, 
+#'  Proc. 4th Ann. ACM-SIAM Symposium on Discrete Algorithms (SODA'93), 271-280.
+#'  
+#'  Arya S., Mount D. M., Netanyahu N. S., Silverman R. and Wu A. Y (1998), An 
+#'  optimal algorithm for approximate nearest neighbor searching, Journal of the
+#'  ACM, 45, 891-923.
 #'@keywords nonparametric
 #'@examples
 #'
