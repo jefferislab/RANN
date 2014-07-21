@@ -1,3 +1,7 @@
+RANN 2.4.1
+==========
+* fix malformed URL field in DESCRIPTION (K. Hornik)
+
 RANN 2.4.0
 ==========
 * fix crashing bug when receving N x 0 input matrix
