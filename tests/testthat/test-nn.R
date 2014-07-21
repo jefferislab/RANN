@@ -96,3 +96,9 @@ test_that("matrix with 0 columns", {
   d=matrix(ncol=0,nrow=90)
   expect_error(nn2(d))
 })
+
+test_that("all NA", {  
+  data=matrix(rnorm(10), ncol=2)
+  query=matrix(rep(NA_real_,10), ncol=2)
+  expect_error(nn2(data = data, query = query, k=1))
+})
