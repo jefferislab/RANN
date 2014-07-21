@@ -66,7 +66,7 @@ test_that("nn2 with identical point", {
 })
 
 
-test_that("nn2 with different search / tree types", {  
+test_that("nn2 with different search / tree types", {
 	set.seed(1)
 	a=matrix(rnorm(3000),ncol=3)
 	b=matrix(rnorm(3000),ncol=3)
@@ -80,7 +80,7 @@ test_that("nn2 with different search / tree types", {
 	expect_equal(n.standard,n.bd.priority)
 })
 
-test_that("nn2 fixed radius with large radius", {  
+test_that("nn2 fixed radius with large radius", {
 	set.seed(1)
 	a=matrix(rnorm(3000),ncol=3)
 	b=matrix(rnorm(3000),ncol=3)
@@ -92,12 +92,12 @@ test_that("nn2 fixed radius with large radius", {
 	expect_equal(n.standard,n.bd.rad)
 })
 
-test_that("matrix with 0 columns", {  
+test_that("matrix with 0 columns", {
   d=matrix(ncol=0,nrow=90)
   expect_error(nn2(d))
 })
 
-test_that("all NA", {  
+test_that("all NA", {
   data=matrix(rnorm(10), ncol=2)
   query=matrix(rep(NA_real_,10), ncol=2)
   expect_error(nn2(data = data, query = query, k=1))
