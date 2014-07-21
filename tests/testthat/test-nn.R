@@ -91,3 +91,8 @@ test_that("nn2 fixed radius with large radius", {
 	expect_equal(n.standard,n.rad)
 	expect_equal(n.standard,n.bd.rad)
 })
+
+test_that("matrix with 0 columns", {  
+  d=matrix(ncol=0,nrow=90)
+  expect_error(nn2(d))
+})
