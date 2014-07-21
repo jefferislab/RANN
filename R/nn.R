@@ -59,11 +59,17 @@ nn2 <- function(data, query=data, k=min(10,nrow(data)),treetype=c("kd","bd"),
                 searchtype=c("standard","priority","radius"),radius=0.0,eps=0.0)
 {
   dimension	<- ncol(data)
+  if(is.null(dimension)) dimension=1L
+  query_dimension  <- ncol(query)
+  if(is.null(query_dimension)) query_dimension=1L
+  
   ND		    <- nrow(data)
+  if(is.null(ND)) ND=length(data)
   NQ		    <- nrow(query)
+  if(is.null(NQ)) NQ=length(data)
   
   # Check that both datasets have same dimensionality
-  if(ncol(data) != ncol(query) )
+  if(query_dimension != query_dimension)
     stop("Query and data tables must have same dimensions")	
   
   if(k>ND)

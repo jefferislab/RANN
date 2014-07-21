@@ -102,3 +102,11 @@ test_that("all NA", {
   query=matrix(rep(NA_real_,10), ncol=2)
   expect_error(nn2(data = data, query = query, k=1))
 })
+
+test_that("mixture of matrix and vector inputs", {
+  mat=matrix(rnorm(10), ncol=1)
+  vec=as.numeric(mat)
+  expect_is(res<-nn2(data = mat, query = vec, k=1), 'list')
+  expect_equal(nn2(data = vec, query = mat, k=1), res)
+  expect_equal(nn2(data = vec, query = vec, k=1), res)
+})
