@@ -77,9 +77,13 @@ nn2 <- function(data, query=data, k=min(10,nrow(data)),treetype=c("kd","bd"),
   if(is.data.frame(data))
     data <- unlist(data,use.names=FALSE)
   
+  if(!length(data)) stop("no points in data!")
+  
   # Coerce to matrix form
   if(!is.matrix(query))
     query <- unlist(query,use.names=FALSE)
+  
+  if(!length(query)) stop("no points in query!")
   
   # void get_NN_2Set(double *data, double *query, int *D, int *ND, int *NQ, int *K, double *EPS,
   # int *nn_index, double *distances)
