@@ -1,4 +1,6 @@
 # RANN
+[![Build Status](https://travis-ci.org/jefferis/RANN.svg)](https://travis-ci.org/jefferis/RANN)
+
 Finds the k nearest neighbours for every point in a given dataset
 in O(N log N) time using Arya and Mount's ANN library (v1.1.3). There is
 support for approximate as well as exact searches, fixed radius searches
