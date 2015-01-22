@@ -333,18 +333,18 @@ const ANNbool	ANN_ALLOW_SELF_MATCH	= ANNtrue;
 //----------------------------------------------------------------------
 //	Use the following for the Euclidean norm
 //----------------------------------------------------------------------
-#define ANN_POW(v)			((v)*(v))
-#define ANN_ROOT(x)			std::sqrt(x)
-#define ANN_SUM(x,y)		((x) + (y))
-#define ANN_DIFF(x,y)		((y) - (x))
+// #define ANN_POW(v)			((v)*(v))
+// #define ANN_ROOT(x)			std::sqrt(x)
+// #define ANN_SUM(x,y)		((x) + (y))
+// #define ANN_DIFF(x,y)		((y) - (x))
 
 //----------------------------------------------------------------------
 //	Use the following for the L_1 (Manhattan) norm
 //----------------------------------------------------------------------
-// #define ANN_POW(v)		fabs(v)
-// #define ANN_ROOT(x)		(x)
-// #define ANN_SUM(x,y)		((x) + (y))
-// #define ANN_DIFF(x,y)	((y) - (x))
+#define ANN_POW(v)		std::fabs(v)
+#define ANN_ROOT(x)		(x)
+#define ANN_SUM(x,y)		((x) + (y))
+#define ANN_DIFF(x,y)	((y) - (x))
 
 //----------------------------------------------------------------------
 //	Use the following for a general L_p norm
