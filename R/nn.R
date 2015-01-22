@@ -10,7 +10,7 @@
 #'input/output dataset. The advantage of the kd-tree is that it runs in O(M log 
 #'M) time.
 #'
-#'The \code{RANN} package utilizes the Approximate Near Neighbor (ANN) C++ 
+#'The \code{RANN1} package utilizes the Approximate Near Neighbor (ANN) C++ 
 #'library, which can give the exact near neighbours or (as the name suggests) 
 #'approximate near neighbours to within a specified error bound.  For more 
 #'information on the ANN library please visit 
@@ -36,6 +36,7 @@
 #'@param searchtype See details
 #'@param radius Radius of search for searchtype='radius'
 #'@param eps Error bound: default of 0.0 implies exact nearest neighbour search
+#'@param metric The metric to use, \code{'euclidean'} or \code{'manhattan'}
 #'@return A \code{list} of length 2 with elements:
 #'  
 #'  \item{nn.idx}{A \bold{N} x \bold{k} integer \code{matrix} returning the near
@@ -63,8 +64,18 @@
 #'nearest <- nn2(DATA,DATA)
 #'@export
 nn2 <- function(data, query=data, k=min(10,nrow(data)),treetype=c("kd","bd"),
-                searchtype=c("standard","priority","radius"),radius=0.0,eps=0.0)
+                searchtype=c("standard","priority","radius"),radius=0.0,eps=0.0,
+                metric=c("manhattan", "euclidean"))
 {
+  metric <- match.arg(metric)
+  worker_nn2 <- get_nn2_func(metric)
+  if (!identical(nn2, worker_nn2)) {
+    return(worker_nn2(
+      data = data, query = query, k = k, treetype = treetype,
+      searchtype = searchtype, radius = 0.0, eps = 0.0,
+      metric = metric))
+  }
+
   dimension	<- ncol(data)
   if(is.null(dimension)) dimension=1L
   query_dimension  <- ncol(query)
@@ -113,7 +124,7 @@ nn2 <- function(data, query=data, k=min(10,nrow(data)),treetype=c("kd","bd"),
                 as.integer(treetype=="bd"), 
                 as.double(radius*radius),
                 nn.idx   = integer(k*NQ),
-                nn       = double(k*NQ), PACKAGE="RANN")
+                nn       = double(k*NQ), PACKAGE="RANN1")
   
   # now put the returned vectors into (nq x k) arrays
   nn.indexes=matrix(results$nn.idx,ncol=k,byrow=TRUE)
@@ -122,16 +133,19 @@ nn2 <- function(data, query=data, k=min(10,nrow(data)),treetype=c("kd","bd"),
   return(list(nn.idx=nn.indexes, nn.dists=nn.dist))
 }
 
-#'Defunct functions in RANN package
-#'
-#'@name RANN-defunct
-NULL
+.nn2_funcs <- new.env(parent = emptyenv())
 
-#'@details C code underlying nn() contained memory leaks.
-#'\code{\link{nn2}} is a more flexible and efficient alternative.
-#'@rdname RANN-defunct
-#'@param ... Ignored
-#'@export
-nn<-function(...){
-  .Defunct('nn2',package='RANN')
+get_nn2_func <- function(metric) {
+  nn2_func <- .nn2_funcs[[metric]]
+  if (is.null(nn2_func)) {
+    pkg_name <- switch(
+      metric,
+      euclidean = "RANN",
+      manhattan = "RANN1",
+      stop("Unsupported metric: ", metric))
+
+    pkg_ns <- loadNamespace(pkg_name)
+    .nn2_funcs[[metric]] <- nn2_func <- get("nn2", pkg_ns)
+  }
+  nn2_func
 }
