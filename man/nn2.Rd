@@ -5,7 +5,8 @@
 \title{Nearest Neighbour Search}
 \usage{
 nn2(data, query = data, k = min(10, nrow(data)), treetype = c("kd", "bd"),
-  searchtype = c("standard", "priority", "radius"), radius = 0, eps = 0)
+  searchtype = c("standard", "priority", "radius"), radius = 0, eps = 0,
+  metric = c("manhattan", "euclidean"))
 }
 \arguments{
 \item{data}{An \bold{M} x \bold{d} data.frame or matrix, where each of the
@@ -43,7 +44,7 @@ input/output dataset. The advantage of the kd-tree is that it runs in O(M log
 M) time.
 }
 \details{
-The \code{RANN} package utilizes the Approximate Near Neighbor (ANN) C++
+The \code{RANN1} package utilizes the Approximate Near Neighbor (ANN) C++
 library, which can give the exact near neighbours or (as the name suggests)
 approximate near neighbours to within a specified error bound.  For more
 information on the ANN library please visit
