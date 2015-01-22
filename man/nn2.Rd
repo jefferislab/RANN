@@ -28,6 +28,8 @@ larger point sets}
 \item{radius}{Radius of search for searchtype='radius'}
 
 \item{eps}{Error bound: default of 0.0 implies exact nearest neighbour search}
+
+\item{metric}{The metric to use, \code{'euclidean'} or \code{'manhattan'}}
 }
 \value{
 A \code{list} of length 2 with elements:

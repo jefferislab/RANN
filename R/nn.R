@@ -36,6 +36,7 @@
 #'@param searchtype See details
 #'@param radius Radius of search for searchtype='radius'
 #'@param eps Error bound: default of 0.0 implies exact nearest neighbour search
+#'@param metric The metric to use, \code{'euclidean'} or \code{'manhattan'}
 #'@return A \code{list} of length 2 with elements:
 #'  
 #'  \item{nn.idx}{A \bold{N} x \bold{k} integer \code{matrix} returning the near
