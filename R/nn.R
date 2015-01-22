@@ -63,8 +63,18 @@
 #'nearest <- nn2(DATA,DATA)
 #'@export
 nn2 <- function(data, query=data, k=min(10,nrow(data)),treetype=c("kd","bd"),
-                searchtype=c("standard","priority","radius"),radius=0.0,eps=0.0)
+                searchtype=c("standard","priority","radius"),radius=0.0,eps=0.0,
+                metric=c("euclidean", "manhattan"))
 {
+  metric <- match.arg(metric)
+  worker_nn2 <- get_nn2_func(metric)
+  if (!identical(nn2, worker_nn2)) {
+    return(worker_nn2(
+      data = data, query = query, k = k, treetype = treetype,
+      searchtype = searchtype, radius = 0.0, eps = 0.0,
+      metric = metric))
+  }
+
   dimension	<- ncol(data)
   if(is.null(dimension)) dimension=1L
   query_dimension  <- ncol(query)
@@ -134,4 +144,15 @@ NULL
 #'@export
 nn<-function(...){
   .Defunct('nn2',package='RANN')
+}
+
+get_nn2_func <- function(metric) {
+  pkg_name <- switch(
+    metric,
+    euclidean = "RANN",
+    manhattan = "RANN1",
+    stop("Unsupported metric: ", metric))
+
+  pkg_ns <- loadNamespace(pkg_name)
+  get("nn2", pkg_ns)
 }
