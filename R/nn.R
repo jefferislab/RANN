@@ -146,13 +146,19 @@ nn<-function(...){
   .Defunct('nn2',package='RANN')
 }
 
-get_nn2_func <- function(metric) {
-  pkg_name <- switch(
-    metric,
-    euclidean = "RANN",
-    manhattan = "RANN1",
-    stop("Unsupported metric: ", metric))
+.nn2_funcs <- new.env(parent = emptyenv())
 
-  pkg_ns <- loadNamespace(pkg_name)
-  get("nn2", pkg_ns)
+get_nn2_func <- function(metric) {
+  nn2_func <- .nn2_funcs[[metric]]
+  if (is.null(nn2_func)) {
+    pkg_name <- switch(
+      metric,
+      euclidean = "RANN",
+      manhattan = "RANN1",
+      stop("Unsupported metric: ", metric))
+
+    pkg_ns <- loadNamespace(pkg_name)
+    .nn2_funcs[[metric]] <- nn2_func <- get("nn2", pkg_ns)
+  }
+  nn2_func
 }
