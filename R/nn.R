@@ -36,6 +36,7 @@
 #'@param searchtype See details
 #'@param radius Radius of search for searchtype='radius'
 #'@param eps Error bound: default of 0.0 implies exact nearest neighbour search
+#'@param metric The metric to use, \code{'euclidean'} or \code{'manhattan'}
 #'@return A \code{list} of length 2 with elements:
 #'  
 #'  \item{nn.idx}{A \bold{N} x \bold{k} integer \code{matrix} returning the near
@@ -132,13 +133,19 @@ nn2 <- function(data, query=data, k=min(10,nrow(data)),treetype=c("kd","bd"),
   return(list(nn.idx=nn.indexes, nn.dists=nn.dist))
 }
 
-get_nn2_func <- function(metric) {
-  pkg_name <- switch(
-    metric,
-    euclidean = "RANN",
-    manhattan = "RANN1",
-    stop("Unsupported metric: ", metric))
+.nn2_funcs <- new.env(parent = emptyenv())
 
-  pkg_ns <- loadNamespace(pkg_name)
-  get("nn2", pkg_ns)
+get_nn2_func <- function(metric) {
+  nn2_func <- .nn2_funcs[[metric]]
+  if (is.null(nn2_func)) {
+    pkg_name <- switch(
+      metric,
+      euclidean = "RANN",
+      manhattan = "RANN1",
+      stop("Unsupported metric: ", metric))
+
+    pkg_ns <- loadNamespace(pkg_name)
+    .nn2_funcs[[metric]] <- nn2_func <- get("nn2", pkg_ns)
+  }
+  nn2_func
 }
