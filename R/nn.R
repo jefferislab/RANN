@@ -42,7 +42,7 @@
 #'  neighbour indices.}
 #'  
 #'  \item{nn.dists}{A \bold{N} x \bold{k} \code{matrix} returning the near 
-#'  neighbour Euclidean distances.}
+#'  neighbour Manhattan distances.}
 #'@author Gregory Jefferis based on earlier code by Samuel E. Kemp (knnFinder 
 #'  package)
 #'@references Bentley J. L. (1975), Multidimensional binary search trees used 

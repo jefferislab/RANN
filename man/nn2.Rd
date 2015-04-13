@@ -35,7 +35,7 @@ A \code{list} of length 2 with elements:
  neighbour indices.}
 
  \item{nn.dists}{A \bold{N} x \bold{k} \code{matrix} returning the near
- neighbour Euclidean distances.}
+ neighbour Manhattan distances.}
 }
 \description{
 Uses a kd-tree to find the p number of near neighbours for each point in an
