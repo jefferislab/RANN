@@ -121,17 +121,3 @@ nn2 <- function(data, query=data, k=min(10,nrow(data)),treetype=c("kd","bd"),
   
   return(list(nn.idx=nn.indexes, nn.dists=nn.dist))
 }
-
-#'Defunct functions in RANN package
-#'
-#'@name RANN-defunct
-NULL
-
-#'@details C code underlying nn() contained memory leaks.
-#'\code{\link{nn2}} is a more flexible and efficient alternative.
-#'@rdname RANN-defunct
-#'@param ... Ignored
-#'@export
-nn<-function(...){
-  .Defunct('nn2',package='RANN')
-}
