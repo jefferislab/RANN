@@ -43,7 +43,7 @@ input/output dataset. The advantage of the kd-tree is that it runs in O(M log
 M) time.
 }
 \details{
-The \code{RANN} package utilizes the Approximate Near Neighbor (ANN) C++
+The \code{RANN1} package utilizes the Approximate Near Neighbor (ANN) C++
 library, which can give the exact near neighbours or (as the name suggests)
 approximate near neighbours to within a specified error bound.  For more
 information on the ANN library please visit
