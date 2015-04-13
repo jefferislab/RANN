@@ -1,5 +1,5 @@
-Package: RANN
-Title: Fast Nearest Neighbour Search (wraps Arya and Mount's ANN library)
+Package: RANN1
+Title: Fast Nearest Neighbour Search (wraps Arya and Mount's ANN library) using the Manhattan metric
 Version: 2.4.1
 Date: 2014-07-21
 Author: Sunil Arya and David Mount (for ANN), Samuel E. Kemp, Gregory Jefferis
@@ -11,6 +11,6 @@ Description: Finds the k nearest neighbours for every point in a given dataset
     and bd as well as kd trees.
 Maintainer: Gregory Jefferis <jefferis@gmail.com>
 License: GPL (>=3)
-URL: https://github.com/jefferis/RANN
+URL: https://github.com/jefferis/RANN/tree/master-L1
 Suggests:
     testthat
