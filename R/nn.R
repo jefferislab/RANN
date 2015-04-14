@@ -36,6 +36,7 @@
 #'@param searchtype See details
 #'@param radius Radius of search for searchtype='radius'
 #'@param eps Error bound: default of 0.0 implies exact nearest neighbour search
+#'@param metric The metric to use, \code{'euclidean'} or \code{'manhattan'}
 #'@return A \code{list} of length 2 with elements:
 #'  
 #'  \item{nn.idx}{A \bold{N} x \bold{k} integer \code{matrix} returning the near
@@ -63,8 +64,18 @@
 #'nearest <- nn2(DATA,DATA)
 #'@export
 nn2 <- function(data, query=data, k=min(10,nrow(data)),treetype=c("kd","bd"),
-                searchtype=c("standard","priority","radius"),radius=0.0,eps=0.0)
+                searchtype=c("standard","priority","radius"),radius=0.0,eps=0.0,
+                metric=c("euclidean", "manhattan"))
 {
+  metric <- match.arg(metric)
+  worker_nn2 <- get_nn2_func(metric)
+  if (!identical(nn2, worker_nn2)) {
+    return(worker_nn2(
+      data = data, query = query, k = k, treetype = treetype,
+      searchtype = searchtype, radius = 0.0, eps = 0.0,
+      metric = metric))
+  }
+
   dimension	<- ncol(data)
   if(is.null(dimension)) dimension=1L
   query_dimension  <- ncol(query)
@@ -120,4 +131,21 @@ nn2 <- function(data, query=data, k=min(10,nrow(data)),treetype=c("kd","bd"),
   nn.dist=matrix(results$nn,ncol=k,byrow=TRUE)
   
   return(list(nn.idx=nn.indexes, nn.dists=nn.dist))
+}
+
+.nn2_funcs <- new.env(parent = emptyenv())
+
+get_nn2_func <- function(metric) {
+  nn2_func <- .nn2_funcs[[metric]]
+  if (is.null(nn2_func)) {
+    pkg_name <- switch(
+      metric,
+      euclidean = "RANN",
+      manhattan = "RANN1",
+      stop("Unsupported metric: ", metric))
+
+    pkg_ns <- loadNamespace(pkg_name)
+    .nn2_funcs[[metric]] <- nn2_func <- get("nn2", pkg_ns)
+  }
+  nn2_func
 }
