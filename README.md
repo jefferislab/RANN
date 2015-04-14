@@ -1,10 +1,13 @@
-# RANN
-[![Build Status](https://travis-ci.org/jefferis/RANN.svg)](https://travis-ci.org/jefferis/RANN)
+# RANN1
+[![Build Status](https://travis-ci.org/jefferis/RANN.svg?branch=master-L1)](https://travis-ci.org/jefferis/RANN1)
 
 Finds the k nearest neighbours for every point in a given dataset
 in O(N log N) time using Arya and Mount's ANN library (v1.1.3). There is
 support for approximate as well as exact searches, fixed radius searches
 and bd as well as kd trees.
+
+This package implements the Manhattan (L1) metric.
+For the Euclidean (L2) metric, install the [RANN](https://github.com/jefferis/RANN) package.
 
 For further details on the underlying ANN library, see http://www.cs.umd.edu/~mount/ANN.
 
@@ -13,17 +16,16 @@ For further details on the underlying ANN library, see http://www.cs.umd.edu/~mo
 The recommendation is to install the released version from [CRAN](http://cran.r-project.org/) by doing:
 
 ```r
-install.packages("RANN")
+install.packages("RANN1")
 ```
 
 ### Bleeding Edge
-You can, however, download the [tar ball](https://github.com/jefferis/RANN/tarball/master), and run `R CMD INSTALL` on it, or use the **devtools** package to install the development version:
+You can, however, download the [tar ball](https://github.com/jefferis/RANN/tarball/master-L1), and run `R CMD INSTALL` on it, or use the **devtools** package to install the development version:
 
 ```r
 # install.packages("devtools")
 
-library(devtools)
-install_github("jefferis/RANN")
+devtools::install_github("jefferis/RANN@master-L1")
 ```
 
 Note: Windows users need [Rtools](http://www.murdoch-sutherland.com/Rtools/) and [devtools](http://CRAN.R-project.org/package=devtools) to install this way.

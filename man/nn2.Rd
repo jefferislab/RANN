@@ -35,7 +35,7 @@ A \code{list} of length 2 with elements:
  neighbour indices.}
 
  \item{nn.dists}{A \bold{N} x \bold{k} \code{matrix} returning the near
- neighbour Euclidean distances.}
+ neighbour Manhattan distances.}
 }
 \description{
 Uses a kd-tree to find the p number of near neighbours for each point in an
@@ -43,7 +43,7 @@ input/output dataset. The advantage of the kd-tree is that it runs in O(M log
 M) time.
 }
 \details{
-The \code{RANN} package utilizes the Approximate Near Neighbor (ANN) C++
+The \code{RANN1} package utilizes the Approximate Near Neighbor (ANN) C++
 library, which can give the exact near neighbours or (as the name suggests)
 approximate near neighbours to within a specified error bound.  For more
 information on the ANN library please visit

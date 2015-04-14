@@ -10,7 +10,7 @@
 #'input/output dataset. The advantage of the kd-tree is that it runs in O(M log 
 #'M) time.
 #'
-#'The \code{RANN} package utilizes the Approximate Near Neighbor (ANN) C++ 
+#'The \code{RANN1} package utilizes the Approximate Near Neighbor (ANN) C++ 
 #'library, which can give the exact near neighbours or (as the name suggests) 
 #'approximate near neighbours to within a specified error bound.  For more 
 #'information on the ANN library please visit 
@@ -42,7 +42,7 @@
 #'  neighbour indices.}
 #'  
 #'  \item{nn.dists}{A \bold{N} x \bold{k} \code{matrix} returning the near 
-#'  neighbour Euclidean distances.}
+#'  neighbour Manhattan distances.}
 #'@author Gregory Jefferis based on earlier code by Samuel E. Kemp (knnFinder 
 #'  package)
 #'@references Bentley J. L. (1975), Multidimensional binary search trees used 
@@ -113,7 +113,7 @@ nn2 <- function(data, query=data, k=min(10,nrow(data)),treetype=c("kd","bd"),
                 as.integer(treetype=="bd"), 
                 as.double(radius*radius),
                 nn.idx   = integer(k*NQ),
-                nn       = double(k*NQ), PACKAGE="RANN")
+                nn       = double(k*NQ), PACKAGE="RANN1")
   
   # now put the returned vectors into (nq x k) arrays
   nn.indexes=matrix(results$nn.idx,ncol=k,byrow=TRUE)
