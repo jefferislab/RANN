@@ -1,3 +1,11 @@
+RANN 2.5.0
+==========
+* completely remove defunct nn function
+* add note in README about new RANN1 package offering Manhattan (L1) metric as
+  an alternative to Euclidean (L2) metric. Note that RANN1 is only available on 
+  github at the time of writing).
+* dev: use ANN_ROOT macro to unsquare distances
+
 RANN 2.4.1
 ==========
 * fix malformed URL field in DESCRIPTION (K. Hornik)
