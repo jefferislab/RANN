@@ -1,6 +1,6 @@
 - New submission
 - Difference to existing package RANN: Metric used for computing distances.
-  RANN uses L2, RANN1 uses L1.  The underlying ANN library requires changing of
+  RANN uses L2, RANN.L1 uses L1.  The underlying ANN library requires changing of
   preprocessor defines to change the metric; using two similar R packages
   seems to be the simplest solution to provide ANN implementations with
   different metrics for the R community.

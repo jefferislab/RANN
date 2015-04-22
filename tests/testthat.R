@@ -1,4 +1,4 @@
 library(testthat)
-library(RANN1)
+library(RANN.L1)
 
-test_check("RANN1")
+test_check("RANN.L1")
