@@ -5,4 +5,4 @@
   seems to be the simplest solution to provide ANN implementations with
   different metrics for the R community.
 - Checked against R 3.2.0 on Ubuntu, R-devel (r68237) on Debian
-  and R-devel (r68221) on win-builder
+  and R 3.2.0 and R-devel (r68221) on win-builder
