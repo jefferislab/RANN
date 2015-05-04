@@ -1,5 +1,5 @@
-# RANN1
-[![Build Status](https://travis-ci.org/jefferis/RANN.svg?branch=master-L1)](https://travis-ci.org/jefferis/RANN1)
+# RANN.L1
+[![Build Status](https://travis-ci.org/jefferis/RANN.svg?branch=master-L1)](https://travis-ci.org/jefferis/RANN.L1)
 
 Finds the k nearest neighbours for every point in a given dataset
 in O(N log N) time using Arya and Mount's ANN library (v1.1.3). There is
@@ -16,7 +16,7 @@ For further details on the underlying ANN library, see http://www.cs.umd.edu/~mo
 The recommendation is to install the released version from [CRAN](http://cran.r-project.org/) by doing:
 
 ```r
-install.packages("RANN1")
+install.packages("RANN.L1")
 ```
 
 ### Bleeding Edge

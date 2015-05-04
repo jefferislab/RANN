@@ -1,2 +1,2 @@
-#' @useDynLib RANN1
+#' @useDynLib RANN.L1
 NULL
