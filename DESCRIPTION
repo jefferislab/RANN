@@ -11,6 +11,7 @@ Description: Finds the k nearest neighbours for every point in a given dataset
     (Euclidean) metric. Please see package 'RANN.L1' for the same
     functionality using the L1 (Manhattan, taxicab) metric.
 URL: https://github.com/jefferis/RANN
+BugReports: https://github.com/jefferis/RANN/issues
 Encoding: UTF-8
 License: GPL (>=3)
 Suggests:
