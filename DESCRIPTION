@@ -16,4 +16,4 @@ Encoding: UTF-8
 License: GPL (>=3)
 Suggests:
     testthat
-Version: 2.5.0
+Version: 2.5.0.99
