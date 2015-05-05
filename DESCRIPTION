@@ -1,7 +1,7 @@
 Encoding: UTF-8
 Package: RANN.L1
 Title: Fast Nearest Neighbour Search (Wraps ANN Library) Using L1 Metric
-Version: 2.5
+Version: 2.5.0
 Author: Sunil Arya and David Mount (for ANN), Samuel E. Kemp, Gregory Jefferis,
     Kirill Müller
 Copyright: ANN library is copyright University of Maryland and Sunil Arya and
