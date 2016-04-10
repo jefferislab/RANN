@@ -110,3 +110,10 @@ test_that("mixture of matrix and vector inputs", {
   expect_equal(nn2(data = vec, query = mat, k=1), res)
   expect_equal(nn2(data = vec, query = vec, k=1), res)
 })
+
+
+test_that("inputs with different dimensions", {
+  mat=matrix(rnorm(20), ncol=2)
+  vec=as.numeric(mat[,1])
+  expect_error(nn2(data = mat, query = vec, k=1), 'same dimensions')
+})
