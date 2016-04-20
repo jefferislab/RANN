@@ -17,3 +17,4 @@ License: GPL (>=3)
 URL: https://github.com/jefferis/RANN/tree/master-L1
 Suggests:
     testthat
+RoxygenNote: 5.0.1
