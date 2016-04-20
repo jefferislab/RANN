@@ -120,3 +120,14 @@ test_that("mixture of matrix and vector inputs", {
   expect_equal(nn2(data = vec, query = mat, k=1), res)
   expect_equal(nn2(data = vec, query = vec, k=1), res)
 })
+
+test_that("vector inputs give outputs of appropriate length", {
+  expect_is(res<-nn2(data = rnorm(10), query = rnorm(5), k=1), 'list')
+  expect_equal(length(res$nn.idx), 5L)
+})
+
+test_that("inputs with different dimensions", {
+  mat=matrix(rnorm(20), ncol=2)
+  vec=as.numeric(mat[,1])
+  expect_error(nn2(data = mat, query = vec, k=1), 'same dimensions')
+})
