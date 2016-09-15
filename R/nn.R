@@ -29,7 +29,7 @@
 #'  \code{data}. \bold{d}, the number of columns, must be the same as 
 #'  \code{data}. If missing, defaults to \code{data}.
 #'@param k The maximum number of nearest neighbours to compute. The default 
-#'  value is set to the smaller of the number of columsn in data
+#'  value is set to the smaller of the number of columnns in data
 #'@param treetype Character vector specifying the standard \code{'kd'} tree or a
 #'  \code{'bd'} (box-decomposition, AMNSW98) tree which may perform better for 
 #'  larger point sets
