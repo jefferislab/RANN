@@ -16,7 +16,7 @@ nn2(data, query = data, k = min(10, nrow(data)), treetype = c("kd", "bd"),
 \code{data}. If missing, defaults to \code{data}.}
 
 \item{k}{The maximum number of nearest neighbours to compute. The default 
-value is set to the smaller of the number of columsn in data}
+value is set to the smaller of the number of columnns in data}
 
 \item{treetype}{Character vector specifying the standard \code{'kd'} tree or a
 \code{'bd'} (box-decomposition, AMNSW98) tree which may perform better for 
