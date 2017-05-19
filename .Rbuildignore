@@ -1,9 +1,9 @@
 .gitignore
 .project
 .settings
-test/
+^test$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.travis\.yml$
 ^cran-comments\.md$
-^revdep/
+^revdep$
