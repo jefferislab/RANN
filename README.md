@@ -1,6 +1,6 @@
 # RANN 
 [![Release Version](https://img.shields.io/github/release/jefferis/RANN.svg)](https://github.com/jefferis/RANN/releases/latest) 
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/RANN)](http://cran.r-project.org/web/packages/RANN) 
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/RANN)](https://CRAN.R-project.org/package=RANN) 
 [![Build Status](https://travis-ci.org/jefferis/RANN.svg)](https://travis-ci.org/jefferis/RANN)
  [![Downloads](http://cranlogs.r-pkg.org/badges/RANN?color=brightgreen)](http://www.r-pkg.org/pkg/RANN)
 
@@ -16,7 +16,7 @@ For further details on the underlying ANN library, see http://www.cs.umd.edu/~mo
 
 ## Installation
 ### Released versions
-The recommendation is to install the released version from [CRAN](http://cran.r-project.org/) by doing:
+The recommendation is to install the released version from [CRAN](https://cran.r-project.org/) by doing:
 
 ```r
 install.packages("RANN")
@@ -31,7 +31,7 @@ You can, however, download the [tar ball](https://github.com/jefferis/RANN/tarba
 devtools::install_github("jefferis/RANN")
 ```
 
-Note: Windows users need [Rtools](http://www.murdoch-sutherland.com/Rtools/) and [devtools](http://CRAN.R-project.org/package=devtools) to install this way.
+Note: Windows users need [Rtools](http://www.murdoch-sutherland.com/Rtools/) and [devtools](https://CRAN.R-project.org/package=devtools) to install this way.
 
 ## Feedback
 Please feel free to:
