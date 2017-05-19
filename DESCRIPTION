@@ -17,3 +17,4 @@ License: GPL (>=3)
 Suggests:
     testthat
 Version: 2.5.0.99
+RoxygenNote: 6.0.1
