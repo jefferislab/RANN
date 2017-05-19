@@ -6,3 +6,4 @@ test/
 ^\.Rproj\.user$
 ^\.travis\.yml$
 ^cran-comments\.md$
+^revdep/
