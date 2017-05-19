@@ -1,3 +1,11 @@
+RANN 2.5.1
+==========
+* bug fix wrong result dimensions when query is a vector (#17)
+  thanks to github user dayey1
+* bug fix: check query vs data dimensions
+* register native routines (now a NOTE on R 3.4.0)
+* fix CRAN URLs in README
+
 RANN 2.5.0
 ==========
 * completely remove defunct nn function
