@@ -1,3 +1,7 @@
+# RANN 2.6.0
+
+* remove register key word from libANN code (at request of CRAN, #23)
+
 # RANN 2.5.1
 
 * bug fix wrong result dimensions when query is a vector (#17)
