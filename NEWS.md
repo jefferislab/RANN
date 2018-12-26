@@ -1,3 +1,5 @@
+# RANN 2.6.0.9000
+
 # RANN 2.6.0
 
 * remove register key word from libANN code (at request of CRAN, #23)
