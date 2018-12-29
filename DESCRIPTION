@@ -16,5 +16,5 @@ Encoding: UTF-8
 License: GPL (>=3)
 Suggests:
     testthat
-Version: 2.6.0.9000
+Version: 2.6.1
 RoxygenNote: 6.1.1
