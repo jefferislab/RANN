@@ -4,9 +4,15 @@
 \alias{nn2}
 \title{Nearest Neighbour Search}
 \usage{
-nn2(data, query = data, k = min(10, nrow(data)), treetype = c("kd",
-  "bd"), searchtype = c("standard", "priority", "radius"), radius = 0,
-  eps = 0)
+nn2(
+  data,
+  query = data,
+  k = min(10, nrow(data)),
+  treetype = c("kd", "bd"),
+  searchtype = c("standard", "priority", "radius"),
+  radius = 0,
+  eps = 0
+)
 }
 \arguments{
 \item{data}{An \bold{M} x \bold{d} data.frame or matrix, where each of the 
