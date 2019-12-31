@@ -1,5 +1,5 @@
 #include <math.h>    // math routines
-#include "ANN.h"     // ANN library header
+#include <ANN/ANN.h> // ANN library header
 #include <R.h>       // R header
 
 //------------------------------------------------------------------------------------------------
