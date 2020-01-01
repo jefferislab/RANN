@@ -1,3 +1,7 @@
+# RANN (in development)
+
+* switch GitHub repo to jefferislab/RANN
+
 # RANN 2.6.1
 
 * Fix Solaris compile error (as requested by BDR, #25)

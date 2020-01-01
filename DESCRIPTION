@@ -12,8 +12,8 @@ Description: Finds the k nearest neighbours for every point in a
     computed using the L2 (Euclidean) metric. Please see package 'RANN.L1'
     for the same functionality using the L1 (Manhattan, taxicab) metric.
 License: GPL (>=3)
-URL: https://github.com/jefferis/RANN
-BugReports: https://github.com/jefferis/RANN/issues
+URL: https://github.com/jefferislab/RANN
+BugReports: https://github.com/jefferislab/RANN/issues
 Suggests:
     testthat
 Copyright: ANN library is copyright University of Maryland and

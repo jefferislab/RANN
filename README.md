@@ -1,7 +1,7 @@
 # RANN 
-[![Release Version](https://img.shields.io/github/release/jefferis/RANN.svg)](https://github.com/jefferis/RANN/releases/latest) 
+[![Release Version](https://img.shields.io/github/release/jefferislab/RANN.svg)](https://github.com/jefferislab/RANN/releases/latest) 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/RANN)](https://CRAN.R-project.org/package=RANN) 
-[![Build Status](https://travis-ci.org/jefferis/RANN.svg)](https://travis-ci.org/jefferis/RANN)
+[![Build Status](https://travis-ci.org/jefferislab/RANN.svg)](https://travis-ci.org/jefferislab/RANN)
  [![Downloads](http://cranlogs.r-pkg.org/badges/RANN?color=brightgreen)](http://www.r-pkg.org/pkg/RANN)
 
 Finds the k nearest neighbours for every point in a given dataset
@@ -10,7 +10,7 @@ support for approximate as well as exact searches, fixed radius searches
 and bd as well as kd trees.
 
 This package implements nearest neighbors for the Euclidean (L2) metric.
-For the Manhattan (L1) metric, install the [RANN1](https://github.com/jefferis/RANN/tree/master-L1) package.
+For the Manhattan (L1) metric, install the [RANN1](https://github.com/jefferislab/RANN/tree/master-L1) package.
 
 For further details on the underlying ANN library, see http://www.cs.umd.edu/~mount/ANN.
 
@@ -23,7 +23,7 @@ install.packages("RANN")
 ```
 
 ### Bleeding Edge
-You can, however, download the [tar ball](https://github.com/jefferis/RANN/tarball/master), and run `R CMD INSTALL` on it, or use the **devtools** package to install the development version:
+You can, however, download the [tar ball](https://github.com/jefferislab/RANN/tarball/master), and run `R CMD INSTALL` on it, or use the **devtools** package to install the development version:
 
 ```r
 # install.packages("devtools")
@@ -36,8 +36,8 @@ Note: Windows users need [Rtools](http://www.murdoch-sutherland.com/Rtools/) and
 ## Feedback
 Please feel free to:
 
-* submit suggestions and bug-reports at: <https://github.com/jefferis/RANN/issues>
-* send pull requests after forking: <https://github.com/jefferis/RANN/>
+* submit suggestions and bug-reports at: <https://github.com/jefferislab/RANN/issues>
+* send pull requests after forking: <https://github.com/jefferislab/RANN/>
 * e-mail the maintainer: <jefferis@gmail.com>
 
 ## Copyright and License
