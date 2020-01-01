@@ -10,3 +10,4 @@
 ^cran-comments\.md$
 ^cran-comments-l1\.md$
 ^revdep$
+^tic\.R$
