@@ -1,6 +1,17 @@
+#include <cstdlib>						// C standard lib defs
+#include <iomanip>				// I/O manipulators
+#include <cmath>			// math includes
+#include <iostream>			// I/O streams
+#include <cstring>			// C-style strings
+
 #include <math.h>    // math routines
-#include "ANN.h"     // ANN library header
 #include <R.h>       // R header
+
+namespace ann2 {
+
+#include <ANN/ANN.h> // ANN library header
+
+}
 
 //------------------------------------------------------------------------------------------------
 //				 Near Neighbours Program
@@ -10,6 +21,8 @@ extern "C"
 	void get_NN_2Set(double *data, double *query, int *D, int *ND, int *NQ, int *K, double *EPS,
 		int *SEARCHTYPE, int *USEBDTREE, double *SQRAD, int *nn_index, double *distances)
 	{
+	using namespace ann2;
+	
 	const int d = *D;		// Number of Dimensions for points
 	const int nd = *ND;		// Number of Data points
 	const int nq= *NQ;		// Number of Query points
