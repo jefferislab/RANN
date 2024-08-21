@@ -1,8 +1,8 @@
 # RANN 
 [![Release Version](https://img.shields.io/github/release/jefferislab/RANN.svg)](https://github.com/jefferislab/RANN/releases/latest) 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/RANN)](https://CRAN.R-project.org/package=RANN) 
-[![Build Status](https://travis-ci.org/jefferislab/RANN.svg)](https://travis-ci.org/jefferislab/RANN)
- [![Downloads](http://cranlogs.r-pkg.org/badges/RANN?color=brightgreen)](http://www.r-pkg.org/pkg/RANN)
+[![R-CMD-check](https://github.com/jefferis/RANN/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jefferislab/RANN/actions/workflows/R-CMD-check.yaml)
+[![Downloads](http://cranlogs.r-pkg.org/badges/RANN?color=brightgreen)](http://www.r-pkg.org/pkg/RANN)
 
 Finds the k nearest neighbours for every point in a given dataset
 in O(N log N) time using Arya and Mount's ANN library (v1.1.3). There is
