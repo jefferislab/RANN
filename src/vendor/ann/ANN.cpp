@@ -30,6 +30,7 @@
 #include <ANN/ANNx.h>					// all ANN includes
 #include <ANN/ANNperf.h>				// ANN performance 
 #ifdef RANN
+#define R_NO_REMAP
 #include <R.h>				// R headers for error handling
 #endif
 
@@ -173,7 +174,7 @@ void annError(const char* msg, ANNerr level)
 {
 	if (level == ANNabort) {
 #ifdef RANN
-		error("RANN: %s",msg);
+		Rf_error("RANN: %s",msg);
 #else
 		cerr << "ANN: ERROR------->" << msg << "<-------------ERROR\n";
 		exit(1);
@@ -181,7 +182,7 @@ void annError(const char* msg, ANNerr level)
 	}
 	else {
 #ifdef RANN
-		warning("RANN: %s",msg);
+		Rf_warning("RANN: %s",msg);
 #else
 		cerr << "ANN: WARNING----->" << msg << "<-------------WARNING\n";
 #endif
