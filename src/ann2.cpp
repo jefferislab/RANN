@@ -5,6 +5,7 @@
 #include <cstring>			// C-style strings
 
 #ifdef RANN
+#define R_NO_REMAP
 #include <R.h>				// R headers for error handling
 #endif
 
