@@ -10,3 +10,4 @@
 ^cran-comments-l1\.md$
 ^revdep$
 ^\.github$
+^pkgdown$
