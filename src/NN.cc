@@ -5,11 +5,12 @@
 #include <cstring>			// C-style strings
 
 #include <math.h>    // math routines
+#define R_NO_REMAP
 #include <R.h>       // R header
 
 namespace ann2 {
 
-#include <ANN/ANN.h> // ANN library header
+#include "ANN/ANN.h" // ANN library header
 
 }
 
