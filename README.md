@@ -3,7 +3,7 @@
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/RANN)](https://CRAN.R-project.org/package=RANN) 
 [![R-CMD-check](https://github.com/jefferis/RANN/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jefferislab/RANN/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/jefferislab/RANN/graph/badge.svg)](https://app.codecov.io/gh/jefferislab/RANN)
-[![Downloads](http://cranlogs.r-pkg.org/badges/RANN?color=brightgreen)](http://www.r-pkg.org/pkg/RANN)
+[![Downloads](http://cranlogs.r-pkg.org/badges/RANN?color=brightgreen)](https://www.r-pkg.org/pkg/RANN)
 
 Finds the k nearest neighbours for every point in a given dataset
 in O(N log N) time using Arya and Mount's ANN library (v1.1.3). There is
@@ -32,7 +32,7 @@ You can, however, download the [tar ball](https://github.com/jefferislab/RANN/ta
 devtools::install_github("jefferis/RANN")
 ```
 
-Note: Windows users need [Rtools](http://www.murdoch-sutherland.com/Rtools/) and [devtools](https://CRAN.R-project.org/package=devtools) to install this way.
+Note: Windows users need [Rtools](https://cloud.r-project.org/bin/windows/Rtools/) and [devtools](https://CRAN.R-project.org/package=devtools) to install this way.
 
 ## Feedback
 Please feel free to:
