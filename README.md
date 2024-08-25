@@ -13,7 +13,7 @@ and bd as well as kd trees.
 This package implements nearest neighbors for the Euclidean (L2) metric.
 For the Manhattan (L1) metric, install the [RANN1](https://github.com/jefferislab/RANN/tree/master-L1) package.
 
-For further details on the underlying ANN library, see http://www.cs.umd.edu/~mount/ANN.
+For further details on the underlying ANN library, see https://www.cs.umd.edu/~mount/ANN.
 
 ## Installation
 ### Released versions
