@@ -14,7 +14,7 @@
 #'library, which can give the exact near neighbours or (as the name suggests) 
 #'approximate near neighbours to within a specified error bound.  For more 
 #'information on the ANN library please visit 
-#'\url{http://www.cs.umd.edu/~mount/ANN/}.
+#'\url{https://www.cs.umd.edu/~mount/ANN/}.
 #'
 #'Search types: \code{priority} visits cells in increasing order of distance 
 #'from the query point, and hence, should converge more rapidly on the true 
