@@ -12,3 +12,4 @@
 ^\.github$
 ^pkgdown$
 ^codecov.yml$
+^CRAN-SUBMISSION$
