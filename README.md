@@ -24,15 +24,12 @@ install.packages("RANN")
 ```
 
 ### Bleeding Edge
-You can, however, download the [tar ball](https://github.com/jefferislab/RANN/tarball/master), and run `R CMD INSTALL` on it, or use the **devtools** package to install the development version:
+You can, however, use the **remotes** package to install the development version:
 
 ```r
-# install.packages("devtools")
-
-devtools::install_github("jefferis/RANN")
+# install.packages("remotes")
+remotes::install_github("jefferis/RANN")
 ```
-
-Note: Windows users need [Rtools](https://cloud.r-project.org/bin/windows/Rtools/) and [devtools](https://CRAN.R-project.org/package=devtools) to install this way.
 
 ## Feedback
 Please feel free to:
