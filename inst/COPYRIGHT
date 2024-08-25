@@ -1,7 +1,6 @@
 This R package is copyright Samuel Kemp 2005-9 and and Gregory Jefferis
-2009-2013, with the exception of files from v 1.1.3 of the ANN library,
-consisting of all files in src/ except for NN.cc, Makevars and Makevars.win
-which are copyright as described below.
+2009-2024, with the exception of files from v 1.1.3 of the ANN library,
+consisting of all files in src/vendor which are copyright as described below.
 
 --
 ANN: Approximate Nearest Neighbors
