@@ -1,7 +1,7 @@
 Package: RANN
 Title: Fast Nearest Neighbour Search (Wraps ANN Library) Using
     L2 Metric
-Version: 2.6.1
+Version: 2.6.2
 Authors@R: c(
     person("Gregory","Jefferis", email="jefferis@gmail.com", 
       role = c("aut", "cre"), comment = c(ORCID = "0000-0002-0587-9355")),
