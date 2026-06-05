@@ -30,4 +30,4 @@ BugReports: https://github.com/jefferislab/RANN/issues
 Suggests:
     testthat
 Encoding: UTF-8
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
