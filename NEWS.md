@@ -1,3 +1,7 @@
+# RANN 2.6.3
+
+* Replace deprecated special argument names in `structure()` calls for R-devel.
+
 # RANN 2.6.2
 
 * define R_NO_REMAP and switch to Rf_* functions at the request of CRAN by 
