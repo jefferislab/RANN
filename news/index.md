@@ -1,5 +1,11 @@
 # Changelog
 
+## RANN 2.6.3
+
+- Replace deprecated special argument names in
+  [`structure()`](https://rdrr.io/r/base/structure.html) calls for
+  R-devel.
+
 ## RANN 2.6.2
 
 CRAN release: 2024-08-25

@@ -27,12 +27,12 @@ Source:
 
 Jefferis G, Kemp SE, Arya S, Mount D (2026). *RANN: Fast Nearest
 Neighbour Search (Wraps ANN Library) Using L2 Metric*. R package version
-2.6.2, <https://github.com/jefferislab/RANN>.
+2.6.3, <https://github.com/jefferislab/RANN>.
 
     @Manual{,
       title = {RANN: Fast Nearest Neighbour Search (Wraps ANN Library) Using L2 Metric},
       author = {Gregory Jefferis and Samuel E. Kemp and Sunil Arya and David Mount},
       year = {2026},
-      note = {R package version 2.6.2},
+      note = {R package version 2.6.3},
       url = {https://github.com/jefferislab/RANN},
     }
